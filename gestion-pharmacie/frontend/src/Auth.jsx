@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './css/auth.css';
 
 export default function Auth() {
@@ -9,18 +10,24 @@ export default function Auth() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    try{
-        const response = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-    }
-    catch(err){
-        console.error(err)
+    try {
+      const response = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await response.json();
+      if (response.ok) {
+        // Successfully logged in, store token and redirect
+        localStorage.setItem('token', data.token);
+        console.log(data.message)
+      } else {
+        // Handle login errors
+        console.error(data.message);
+      }
+    } catch(err) {
+      console.error('Login error:', err);
     }
   }
 
