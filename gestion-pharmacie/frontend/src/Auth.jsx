@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './css/auth.css';
+import { useAuth } from "./AuthContext";
+import {jwtDecode} from 'jwt-decode';
 
 export default function Auth() {
   
   const [formData, setFormData] = useState({ userName: '', password: '' });
+  const {login} = useAuth();
+  const navigate = useNavigate();
 
 
 
@@ -18,10 +22,13 @@ export default function Auth() {
       });
       
       const data = await response.json();
-      if (response.ok) {
-        // Successfully logged in, store token and redirect
-        localStorage.setItem('token', data.token);
+
+      if (response.ok && data.token) {
         console.log(data.message)
+        login(data.token);
+        const decoded = jwtDecode(data.token);
+        navigate(`/${decoded.role}`);
+        
       } else {
         // Handle login errors
         console.error(data.message);
