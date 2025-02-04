@@ -1,10 +1,11 @@
 import { Link, Outlet } from "react-router-dom"
+import './css/home.css'
+import Nav from "./Nav"
 export default function HomeLayout() {
     return (
-        <div>
-            <h1>Home Layout</h1>
-            <Link to='/superAdmin/gestion-utilisateurs'>Link</Link>
-            <Outlet/>
+        <div className="home">
+            <Nav/>
+            <Outlet />
         </div>
         
     )

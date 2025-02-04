@@ -1,0 +1,66 @@
+@import url("colors.css");
+
+.home {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  background-color: var(--color-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.nav .nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  gap: 0.7rem;
+}
+.nav .nav-logo img {
+  width: 83px;
+  height: 83px;
+}
+.nav .nav-logo h2 {
+  color: white;
+}
+
+.logout-btn {
+  margin-top: auto;
+  padding: 0.5rem 0;
+  background-color: #c54234;
+  color: white;
+  font-weight: 550;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.logout-btn:hover {
+  background-color: #b03a2e;
+}
+
+.nav ul {
+  position: relative;
+  top: 3rem;
+  width: 100%;
+}
+.nav ul li {
+  width: 100%;
+}
+.nav ul li .link {
+  text-decoration: none;
+  color: white;
+  font-weight: 550;
+  margin-left: 0.8rem;
+  display: block;
+  width: 100%;
+  border-radius: 0.6rem;
+  font-size: 1.15rem;
+  padding: 0.8rem 0 0.8rem 0.5rem;
+  transition: 0.2s ease;
+}
+.nav ul li .link:hover {
+  background-color: var(--color-secondary);
+}
