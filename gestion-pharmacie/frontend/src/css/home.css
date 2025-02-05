@@ -7,7 +7,7 @@
 .nav {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 19%;
   background-color: var(--color-primary);
   height: 100vh;
   overflow: hidden;
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  gap: 0.7rem;
+  gap: 0.6rem;
 }
 .nav .nav-logo img {
   width: 83px;
@@ -60,6 +60,9 @@
   font-size: 1.15rem;
   padding: 0.8rem 0 0.8rem 0.5rem;
   transition: 0.2s ease;
+}
+.nav ul li .active {
+  background-color: var(--color-secondary);
 }
 .nav ul li .link:hover {
   background-color: var(--color-secondary);

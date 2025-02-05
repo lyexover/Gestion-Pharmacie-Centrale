@@ -1,8 +1,12 @@
 import { useAuth } from "./AuthContext";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Nav() {
 const {user, logout} = useAuth();     
+const [clicked, setClicked] = useState('');
+console.log(clicked)
+
 const fonctionalites = {
     superAdmin : [
         {
@@ -37,7 +41,9 @@ return (
             {
                 fonctionalites[user.role].map((fonctionalite, index) => (
                     <li key={index}>
-                        <Link className="link" to={`/${user.role}/${fonctionalite.path}`}>{fonctionalite.label}</Link>
+                        <Link onClick={()=>setClicked(fonctionalite.label)}
+                         className={`link ${clicked === fonctionalite.label ? 'active' : ''}`}
+                          to={`/${user.role}/${fonctionalite.path}`}>{fonctionalite.label}</Link>
                     </li>
                 ))
             }
