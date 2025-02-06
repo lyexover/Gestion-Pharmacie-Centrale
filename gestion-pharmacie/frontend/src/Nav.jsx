@@ -5,13 +5,25 @@ import { useState } from "react";
 export default function Nav() {
 const {user, logout} = useAuth();     
 const [clicked, setClicked] = useState('');
-console.log(clicked)
+
 
 const fonctionalites = {
     superAdmin : [
         {
             path : 'gestion-utilisateurs' , 
             label : 'Gestion Utilisateurs'
+        } , 
+        {
+            path : 'gestion-stock' , 
+            label : 'Gestion Stock'
+        } , 
+        {
+            path : 'mes-commandes' , 
+            label : 'Mes Commandes'
+        } , 
+        {
+            path : 'Dashboard' , 
+            label : 'Dashboard'
         }
     ] , 
     gestionnaire_stock : [

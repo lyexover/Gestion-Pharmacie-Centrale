@@ -3,9 +3,9 @@ const router = express.Router();
 const db = require("../db"); // Connexion à la base de données
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-const SECRET_KEY =
-  "f1a8e12b76c8d0f3e5b4a2c9d8f6e7a4c1b2d3f4e5a6b7c8d9e0f1a2b3c4d5e6"; // Remplace par une clé sécurisée
+const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post("/login", (req, res) => {
   const { userName, password } = req.body;
@@ -44,10 +44,10 @@ router.post("/login", (req, res) => {
 
 
 router.post("/signup", (req, res) => {
-  const { userName, password, role } = req.body;
+  const { username, password, role, email, region } = req.body;
 
   const checkQuery = " SELECT * FROM utilisateurs WHERE userName = ?";
-  db.query(checkQuery, [userName], async (err, results) => {
+  db.query(checkQuery, [username], async (err, results) => {
     if (err) {
       return res.status(500).json({ message: err.message });
     }
@@ -56,9 +56,9 @@ router.post("/signup", (req, res) => {
     }
     const hashedpass = await bcrypt.hash(password, 10);
     const insertQeury =
-      " INSERT INTO utilisateurs (userName, mot_de_passe, role) VALUES(?, ?, ?)";
+      " INSERT INTO utilisateurs (userName, email, mot_de_passe, role, id_region) VALUES(?, ?, ?, ?, ?)";
 
-    db.query(insertQeury, [userName, hashedpass, role], (err, result) => {
+    db.query(insertQeury, [username, email, hashedpass, role, region], (err, result) => {
       if (err) {
         return res.status(500).json({ message: err.message });
       }
@@ -66,4 +66,8 @@ router.post("/signup", (req, res) => {
     });
   });
 });
+
+
+
+
 module.exports = router;

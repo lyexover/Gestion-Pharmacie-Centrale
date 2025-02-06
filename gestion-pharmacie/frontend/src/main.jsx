@@ -9,6 +9,7 @@ import HomeLayout from './HomeLayout'
 import GestionUtilisateurs from './GestionUtilisateurs'
 import GestionStock from './GestionStock'
 import MesCommandes from './MesCommandes'
+import {loader as usersLoader} from './GestionUtilisateurs'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
             children : [
               {
                 path : 'gestion-utilisateurs' , 
-                element : <GestionUtilisateurs />
+                element : <GestionUtilisateurs /> , 
+                loader : usersLoader
               }
             ]
           } , 
