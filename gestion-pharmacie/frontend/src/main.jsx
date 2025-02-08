@@ -10,6 +10,9 @@ import GestionUtilisateurs from './GestionUtilisateurs'
 import GestionStock from './GestionStock'
 import MesCommandes from './MesCommandes'
 import {loader as usersLoader} from './GestionUtilisateurs'
+import GestionProduits from './GestionProduits'
+import {loader as produitsLoader} from './GestionProduits'
+import ProductForm , {loader as typesLoader} from './ProductForm'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
                 path : 'gestion-utilisateurs' , 
                 element : <GestionUtilisateurs /> , 
                 loader : usersLoader
+              } , 
+              {
+                path : 'gestion-stock' , 
+                element : <GestionProduits /> , 
+                loader : produitsLoader , 
+                children : [
+                  {
+                    path : 'ajouter-produit' , 
+                    element : <ProductForm /> , 
+                    loader : typesLoader
+                  }
+                ]
               }
             ]
           } , 

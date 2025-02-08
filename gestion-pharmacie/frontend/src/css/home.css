@@ -81,10 +81,10 @@
 }
 
 .log-info {
-  background-color: var(--color-gray);
+  background-color: rgb(237, 237, 237);
   width: 100%;
   font-size: 1rem;
-  padding: 0.29rem;
+  padding: 0.32rem;
   text-align: end;
   position: sticky;
   top: 0;

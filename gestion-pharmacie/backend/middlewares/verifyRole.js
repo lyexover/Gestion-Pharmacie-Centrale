@@ -8,7 +8,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 
 // fonction qui verifie le role de l'utilisateur pour securiser les routes
-const verifyRole = (requiredRole)=> {
+const verifyRole = (requiredRoles)=> {
    
     return (req, res, next)=> {
         try{
@@ -20,7 +20,7 @@ const verifyRole = (requiredRole)=> {
      
        const decoded = jwt.verify(token, SECRET_KEY);
        console.log(decoded.role)
-       if(decoded.role !== requiredRole){
+       if(!requiredRoles.includes(decoded.role)){
            return res.status(403).json({ message: "Non autorisé" });
        }
        next();
