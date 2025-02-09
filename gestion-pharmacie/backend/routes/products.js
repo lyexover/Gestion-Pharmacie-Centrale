@@ -19,7 +19,18 @@ router.post('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), (req,
 
 router.get('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), (req, res) => {
     
-    db.query('SELECT * FROM produits', (err, products) => {
+    const query = `SELECT p.code_produit, 
+       p.nom, 
+       c.nom_classe, 
+       t.nom_type, 
+       COALESCE(SUM(l.quantite_disponible), 0) AS total_quantite
+FROM Produits p
+LEFT JOIN Lots l ON p.code_produit = l.code_produit 
+JOIN Classes c ON c.id_classe = p.classe 
+JOIN types t ON t.id_type = p.id_type
+GROUP BY p.code_produit, p.nom, c.nom_classe, t.nom_type;
+`
+    db.query(query, (err, products) => {
         if (err) {
             return res.status(500).json({ message: err.message });
         }

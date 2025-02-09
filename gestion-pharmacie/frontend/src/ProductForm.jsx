@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate ,useRevalidator } from "react-router-dom";
 import { useState } from "react";
 
 export async function loader(){
@@ -17,6 +17,7 @@ export async function loader(){
                 throw new Error();
             }
             
+            
             return ({classes : data.classes, types: data.types});
         }
         catch(err){
@@ -30,7 +31,7 @@ export async function loader(){
 export default function ProductForm() {
 
     const {classes, types} = useLoaderData();
-  
+    const revalidator = useRevalidator();
     const navigate = useNavigate();
 
    const [formData , setFormData] = useState({
@@ -60,6 +61,9 @@ export default function ProductForm() {
     })
     const data = await response.json();
     if (!response.ok) throw new Error(data.message);
+
+   await revalidator.revalidate() ; 
+    navigate(-1);
     console.log(data.message);
 }
 

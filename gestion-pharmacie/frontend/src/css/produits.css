@@ -2,7 +2,7 @@
 
 /* Layout Principal */
 .stock-container {
-  padding: 2rem;
+  padding: 1rem;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 1.5rem;
   background-color: var(--color-white);
   border-radius: 8px;
@@ -56,16 +56,21 @@
   box-shadow: 0 4px 12px rgba(0, 41, 107, 0.15);
 }
 
-/* Navigation */
+/* Navigation with Search */
 .stock-nav {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
-  padding: 0.5rem;
+  padding: 0.75rem 1.25rem;
   background-color: var(--color-white);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 41, 107, 0.1);
+}
+
+.nav-group {
+  display: flex;
+  gap: 1rem;
 }
 
 .stock-nav button {
@@ -95,6 +100,36 @@
   width: 100%;
 }
 
+/* Search Container */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-container i {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px rgba(0, 178, 255, 0.2);
+}
+
 /* Contenu */
 .stock-content {
   display: grid;
@@ -103,46 +138,73 @@
   padding: 1rem;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .stock-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .actions a {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .stock-content {
-    grid-template-columns: 1fr;
-  }
+/* Card Component Styles */
+.stock-card {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 41, 107, 0.1);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-@media (max-width: 480px) {
-  .stock-container {
-    padding: 1rem;
-  }
-
-  .stock-nav {
-    flex-direction: column;
-  }
-
-  .stock-nav button {
-    width: 100%;
-    text-align: center;
-  }
+.stock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 41, 107, 0.15);
 }
 
-/* form --------------------------------------------------------------------------------*/
+.stock-card-header {
+  border-bottom: 1px solid var(--color-gray);
+  padding-bottom: 1rem;
+}
 
+.stock-card-title {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: var(--font-semibold);
+  margin-bottom: 0.5rem;
+}
+
+.stock-card-reference {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  font-weight: var(--font-medium);
+}
+
+.stock-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stock-card-product,
+.stock-card-lot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stock-card-info {
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+.stock-card-quantity {
+  color: var(--color-secondary);
+  font-weight: var(--font-medium);
+  font-size: 1.1rem;
+}
+
+.stock-card-date {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: var(--font-medium);
+  margin-top: 0.25rem;
+}
+
+/* Form Styles */
 .overlay {
   position: fixed;
   top: 0;
@@ -251,6 +313,70 @@
 .submit-button:active,
 .cancel-button:active {
   transform: translateY(1px);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .stock-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .actions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stock-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .nav-group {
+    width: 100%;
+  }
+
+  .nav-group button {
+    flex: 1;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .stock-card {
+    padding: 1.25rem;
+  }
+
+  .stock-card-title {
+    font-size: 1.1rem;
+  }
+
+  .stock-card-quantity {
+    font-size: 1rem;
+  }
+
+  .stock-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stock-container {
+    padding: 1rem;
+  }
+
+  .stock-nav button {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 600px) {
