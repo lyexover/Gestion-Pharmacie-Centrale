@@ -36,15 +36,28 @@ export default function GestionProduits(){
     const {produits, lots} = useLoaderData();
     const [search, setSearch] = useState('');
     const [filteredProduits, setFilteredProduits] = useState(selected === 'produits' ? produits : lots);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+    const totlalPages = Math.ceil(filteredProduits.length / itemsPerPage);
 
+    console.log(selected)
+
+
+   
     useEffect(() => {
    
         const filtered = selected === 'produits' ? 
         produits.filter(produit => produit.nom.toLowerCase().includes(search.toLowerCase())) :
-        lots.filter(lot => lot.nom_produit.toLowerCase().includes(search.toLowerCase()));
+        lots.filter(lot => lot.nom.toLowerCase().includes(search.toLowerCase()));
         setFilteredProduits(filtered);
 
     } , [search, selected, produits, lots]);
+
+
+    const indexOfLastItem = currentPage * itemsPerPage - 1 ;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage + 1;
+    const currentItems = filteredProduits.slice(indexOfFirstItem, indexOfLastItem + 1);
+
 
     return (
         <div className='stock-container' >
@@ -52,7 +65,7 @@ export default function GestionProduits(){
                 <h1>Gestion du Stock</h1>
                 <div className="actions">
                     <Link to='ajouter-produit'><i class="fa-solid fa-plus"></i> Nouveau Produit</Link>
-                    <Link><i class="fa-solid fa-plus"></i> Nouveau Lot</Link>
+                    <Link to='ajouter-Lot' ><i class="fa-solid fa-plus"></i> Nouveau Lot</Link>
                 </div>
            </div>
 
@@ -73,9 +86,25 @@ export default function GestionProduits(){
 
            <div className="stock-content">
            {
-             selected === 'produits' ? filteredProduits.map((produit, index) => <Card key={index} data={produit} type="produits" />) :
-             lots.map((lot, index) => <Card key={index} data={lot} type="lots" />)
+              currentItems.map((produit, index) => <Card key={index} data={produit} type={selected} />) 
            }
+           </div>
+
+
+           <div className="stock-pagination">
+                
+                {
+                    [...Array(totlalPages)].map((_, index) => (
+                        <button 
+                            key={index}
+                            className={currentPage === index + 1 ? 'active' : ''}
+                            onClick={() => setCurrentPage(index + 1)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))
+                }
+
            </div>
 
             <Outlet/>

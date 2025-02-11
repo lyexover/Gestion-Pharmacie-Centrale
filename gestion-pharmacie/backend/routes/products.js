@@ -4,6 +4,7 @@ const db = require("../db"); // Connexion à la base de données
 const verifyRole = require("../middlewares/verifyRole");
 
 
+
 router.post('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), (req, res) => {
 
     const { nom, description, classe, type } = req.body;
@@ -35,7 +36,7 @@ GROUP BY p.code_produit, p.nom, c.nom_classe, t.nom_type;
             return res.status(500).json({ message: err.message });
         }
         
-        db.query('SELECT * FROM lots', (err, lots) => {
+        db.query('SELECT * FROM lots NATURAL JOIN produits', (err, lots) => {
             if (err) {
                 return res.status(500).json({ message: err.message });
             }
@@ -71,6 +72,43 @@ router.get('/classes', verifyRole(['superAdmin', 'gestionnaire_stock']), (req, r
     });
 });
 
+
+router.get('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']) , (req, res)=>{
+    db.query('SELECT * FROM produits', (err, produits) => {
+        if(err){
+            return res.status(500).json({message : 'db error'})
+        }
+
+        db.query('SELECT * FROM fournisseurs' , (err, fournisseurs)=> {
+            if(err){
+                return res.status(500).json({message : 'db error'})
+            }
+
+            return res.json({
+                produits : produits , 
+                fournisseurs : fournisseurs
+            })
+        })
+    })
+
+})
+
+
+
+router.post('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']) , (req, res) => {
+    const {id_produit, date_fabrication, date_peremption, id_fournisseur, quantite} = req.body
+
+    const query = ` INSERT INTO lots (quantite_disponible, date_fabrication, date_peremption, id_fournisseur, code_produit)
+                  VALUES (?, ?, ?, ?, ?)`
+
+    db.query(query, [quantite, date_fabrication, date_peremption, id_fournisseur, id_produit] , (err, results) => {
+      if(err){
+        return res.status(500).json({message : 'db error'})
+      }
+
+      return res.json({message : 'added successfully'})
+    })
+})
 
 
 module.exports = router;

@@ -1,6 +1,6 @@
 export default function Card({data, type}){
 
-    console.log(data, type)
+    console.log( type)
 
     return (
         <div className="stock-card">
@@ -10,7 +10,7 @@ export default function Card({data, type}){
             </div>
             
             <div className="stock-card-content">
-                {type == 'produits' ? (
+                {type === 'produits' ? (
                     <div className="stock-card-product">
                         <p className="stock-card-info">{data.nom_classe}</p>
                         <p className="stock-card-info">{data.nom_type}</p>
@@ -18,10 +18,9 @@ export default function Card({data, type}){
                     </div>
                 ) : (
                     <div className="stock-card-lot">
-                        <p className="stock-card-info">{data.nom_produit}</p>
-                        <p className="stock-card-quantity">{data.quantite}</p>
-                        <p className="stock-card-quantity">{data.quantite_disponible}</p>
-                        <p className="stock-card-date">{data.date_peremption}</p>
+    
+                        <p className="stock-card-quantity">Quantite : {data.quantite_disponible}</p>
+                        <p className="stock-card-date">Date peremption : {data.date_peremption}</p>
                     </div>
                 )}
             </div>

@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import {createBrowserRouter , RouterProvider, Navigate} from 'react-router-dom'
+import {createBrowserRouter , RouterProvider, Navigate, Form} from 'react-router-dom'
 import './index.css'
 import Auth from './Auth'
 import { AuthProvider } from './AuthContext'
@@ -13,6 +13,7 @@ import {loader as usersLoader} from './GestionUtilisateurs'
 import GestionProduits from './GestionProduits'
 import {loader as produitsLoader} from './GestionProduits'
 import ProductForm , {loader as typesLoader} from './ProductForm'
+import LotForm, {loader as LotFromLoader} from './LotForm'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
                     path : 'ajouter-produit' , 
                     element : <ProductForm /> , 
                     loader : typesLoader
+                  } , 
+                  {
+                    path : 'ajouter-Lot', 
+                    element : <LotForm/>, 
+                    loader : LotFromLoader
                   }
                 ]
               }
