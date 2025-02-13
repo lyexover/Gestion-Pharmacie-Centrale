@@ -15,7 +15,8 @@ useEffect(() => {
     setUser({
         id: decoded.id,
             userName: decoded.userName,
-            role: decoded.role
+            role: decoded.role , 
+            region: decoded.id_region
     });
 
   }

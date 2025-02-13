@@ -18,7 +18,7 @@ router.post('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), (req,
 })
 
 
-router.get('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), (req, res) => {
+router.get('/products', verifyRole(['superAdmin', 'gestionnaire_stock', , 'admin_base']), (req, res) => {
     
     const query = `SELECT p.code_produit, 
        p.nom, 

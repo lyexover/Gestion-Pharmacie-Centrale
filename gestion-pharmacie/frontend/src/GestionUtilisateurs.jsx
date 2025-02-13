@@ -3,6 +3,7 @@ import "./css/users.css"
 import { useAuth } from "./AuthContext"
 import { data, useLoaderData } from "react-router-dom";
 
+
 export async function loader() {
   const token = localStorage.getItem("token");
   try {
@@ -21,6 +22,7 @@ export async function loader() {
     return [];
   }
 }
+
 
 export default function GestionUtilisateurs() {
   const initialUsers = useLoaderData();

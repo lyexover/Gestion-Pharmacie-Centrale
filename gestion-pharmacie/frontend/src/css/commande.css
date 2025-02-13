@@ -1,0 +1,381 @@
+/* Container principal */
+.commandes-header {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--color-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.commandes-header h1 {
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+}
+
+/* Navigation */
+.commandes-nav {
+  display: flex;
+  gap: 1rem;
+
+  align-items: center;
+}
+
+.commandes-nav button {
+  padding: 0.75rem 2rem;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-primary);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.commandes-nav button:hover {
+  color: var(--color-secondary);
+  border-bottom-color: var(--color-secondary);
+}
+
+.commandes-nav button:focus {
+  outline: none;
+  border-bottom-color: var(--color-secondary);
+}
+
+/* Table des commandes */
+.mes-commandes {
+  padding: 2rem;
+}
+
+.mes-commandes table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mes-commandes thead {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.mes-commandes th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: var(--font-semibold);
+}
+
+.mes-commandes td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.mes-commandes tbody tr:hover {
+  background-color: var(--color-gray);
+}
+
+/* Message quand il n'y a pas de commandes */
+.mes-commandes tbody tr td:only-child {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-primary);
+  font-weight: var(--font-medium);
+}
+
+/* Bouton Details */
+.mes-commandes button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  cursor: pointer;
+  font-weight: var(--font-medium);
+  transition: opacity 0.3s ease;
+}
+
+.mes-commandes button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .commandes-header {
+    padding: 1rem;
+  }
+
+  .commandes-nav {
+    flex-direction: column;
+  }
+
+  .commandes-nav button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .mes-commandes {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .mes-commandes table {
+    min-width: 600px;
+  }
+}
+
+/* Statut styling */
+.mes-commandes td:nth-child(3) {
+  font-weight: var(--font-medium);
+}
+
+/* ID styling */
+.mes-commandes td:first-child {
+  font-family: monospace;
+  color: var(--color-primary);
+}
+
+/* Date styling */
+.mes-commandes td:nth-child(2) {
+  color: #666;
+}
+
+/*form ---------------------------------------------------------------------*/
+.commande-form {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray);
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+  position: relative;
+}
+
+.step.active {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.step::after {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2px;
+  background-color: var(--color-gray);
+  right: -2rem;
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.step.active::after {
+  background-color: var(--color-secondary);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.product-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: fit-content;
+}
+
+.product-card h3 {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  margin: 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-controls button:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+}
+
+.add-button {
+  width: 100% !important;
+  border-radius: 4px !important;
+  height: 36px !important;
+}
+
+.delai-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  color: var(--color-primary);
+  font-weight: var(--font-medium);
+}
+
+.input-group input {
+  padding: 0.75rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.summary-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.delai-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--color-gray);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.form-navigation button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: var(--font-medium);
+  cursor: pointer;
+}
+
+.prev-button {
+  background-color: var(--color-gray);
+  color: var(--color-primary);
+}
+
+.next-button,
+.submit-button {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.next-button:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pagination button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-gray);
+}
+
+.pagination button:hover {
+  background-color: var(--color-gray);
+}
+
+.pagination button.active {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+}
+
+/* Ajustements responsifs */
+@media (max-width: 768px) {
+  .pagination {
+    gap: 0.25rem;
+  }
+
+  .pagination button {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Améliorations pour la grille de produits */
+.products-grid {
+  min-height: 400px; /* Évite les sauts de page brusques lors du changement de page */
+  margin-bottom: 1rem;
+}
+
+/* Style pour le cas où il n'y a pas de produits */
+.products-grid:empty::after {
+  content: "Aucun produit disponible";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  color: var(--color-primary);
+  font-weight: var(--font-medium);
+}

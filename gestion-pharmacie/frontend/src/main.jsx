@@ -11,7 +11,7 @@ import GestionStock from './GestionStock'
 import MesCommandes from './MesCommandes'
 import {loader as usersLoader} from './GestionUtilisateurs'
 import GestionProduits from './GestionProduits'
-import {loader as produitsLoader} from './GestionProduits'
+import {loader} from './HomeLayout'
 import ProductForm , {loader as typesLoader} from './ProductForm'
 import LotForm, {loader as LotFromLoader} from './LotForm'
 
@@ -29,6 +29,8 @@ const router = createBrowserRouter([
     children : [
       {
         element : <HomeLayout/> , 
+        loader : loader , 
+        id : 'parent',
         children : [
           {
             path : 'superAdmin' , 
@@ -41,8 +43,7 @@ const router = createBrowserRouter([
               } , 
               {
                 path : 'gestion-stock' , 
-                element : <GestionProduits /> , 
-                loader : produitsLoader , 
+                element : <GestionProduits /> ,
                 children : [
                   {
                     path : 'ajouter-produit' , 

@@ -1,39 +1,14 @@
-import {Link, useLoaderData, Outlet, useRevalidator} from 'react-router-dom';
+import {Link, useRouteLoaderData, Outlet, useRevalidator} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import './css/produits.css'
-
-
-export async function loader(){
-    try {
-        const response = await fetch('http://localhost:3000/api/products' , 
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            }
-        );
-        if (!response.ok) {
-            
-            throw new Error();
-        }
-        const data = await response.json();
-       
-        return {produits : data.produits , lots : data.lots}  ; 
-    }
-    catch(err){
-        console.log(err);
-        return { produits: [], lots: [] };
-    }
-}
 
 
 export default function GestionProduits(){
 
     
     const [selected, setSelected] = useState('produits');
-    const {produits, lots} = useLoaderData();
+    const {produits, lots} = useRouteLoaderData('parent');
     const [search, setSearch] = useState('');
     const [filteredProduits, setFilteredProduits] = useState(selected === 'produits' ? produits : lots);
     const [currentPage, setCurrentPage] = useState(1);
