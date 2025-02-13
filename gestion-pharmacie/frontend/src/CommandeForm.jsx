@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './css/commande.css';
+import { useAuth } from './AuthContext';
 
 export default function CommandeForm({ produits }) {
     const [step, setStep] = useState(1);
@@ -7,6 +8,7 @@ export default function CommandeForm({ produits }) {
     const [delai, setDelai] = useState('');
     const [searchData, setSearchData] = useState('')
     const [filteredProducts, setFilteredProducts] = useState(produits)
+    const {user} = useAuth()
 
     useEffect(()=> {
         setFilteredProducts(produits.filter(product => product.nom.toLowerCase().includes(searchData.toLowerCase())))
@@ -48,14 +50,41 @@ export default function CommandeForm({ produits }) {
         }
     };
 
-    const handleSubmit = (e) => {
+console.log(user.id ,user.region, delai, selectedProducts)
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle submission logic here
-        console.log({
-            products: selectedProducts,
-            delai: parseInt(delai)
-        });
+        const token = localStorage.getItem('token')
+        try {
+            const response = await fetch('http://localhost:3000/api/commandes', {
+                method : 'POST', 
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                } , 
+                body : JSON.stringify({
+                  id : user.id, 
+                  region : user.region , 
+                  delai : delai, 
+                  produits : selectedProducts
+                })
+            })
+
+            const data = await response.json()
+
+            if(!response.ok){
+                throw new Error(data.message)
+            }
+
+            console.log(data.message)
+        }
+        catch(err){
+            console.error(err)
+        }
+
     };
+
+
 
     const nextStep = () => {
         if ((step === 1 && selectedProducts.length > 0) || 

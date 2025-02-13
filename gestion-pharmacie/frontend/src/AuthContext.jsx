@@ -13,10 +13,10 @@ useEffect(() => {
  const decoded = jwtDecode(token);
   if(decoded.exp * 1000 > Date.now()) {
     setUser({
-        id: decoded.id,
+             id: decoded.id,
             userName: decoded.userName,
             role: decoded.role , 
-            region: decoded.id_region
+            region: decoded.region
     });
 
   }
