@@ -16,7 +16,6 @@
 .commandes-nav {
   display: flex;
   gap: 1rem;
-
   align-items: center;
 }
 
@@ -24,21 +23,29 @@
   padding: 0.75rem 2rem;
   border: none;
   background: none;
-  border-bottom: 2px solid transparent;
   color: var(--color-primary);
   font-weight: var(--font-medium);
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
-.commandes-nav button:hover {
-  color: var(--color-secondary);
-  border-bottom-color: var(--color-secondary);
+.commandes-nav button::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: var(--color-secondary);
+  width: 0;
+  bottom: -1px;
+  left: 0;
+  transition: 0.3s width ease;
+}
+.commandes-nav button:hover::after {
+  width: 100%;
 }
 
-.commandes-nav button:focus {
-  outline: none;
-  border-bottom-color: var(--color-secondary);
+.commandes-nav .active {
+  border-bottom: 2px solid var(--color-secondary);
 }
 
 /* Table des commandes */
@@ -138,6 +145,11 @@
   color: #666;
 }
 
+.searchbar {
+  margin-bottom: 1.2rem;
+  width: 400px;
+}
+
 /*form ---------------------------------------------------------------------*/
 .commande-form {
   padding: 2rem;
@@ -149,7 +161,7 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .step {
@@ -330,9 +342,9 @@
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 50%;
-  background-color: var(--color-white);
-  color: var(--color-primary);
+  border-radius: 0.4rem;
+  background-color: var(--color-secondary);
+  color: white;
   font-weight: var(--font-medium);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -340,11 +352,12 @@
 }
 
 .pagination button:hover {
-  background-color: var(--color-gray);
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
 }
 
 .pagination button.active {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   color: var(--color-white);
   border: none;
 }
@@ -364,7 +377,6 @@
 
 /* Améliorations pour la grille de produits */
 .products-grid {
-  min-height: 400px; /* Évite les sauts de page brusques lors du changement de page */
   margin-bottom: 1rem;
 }
 

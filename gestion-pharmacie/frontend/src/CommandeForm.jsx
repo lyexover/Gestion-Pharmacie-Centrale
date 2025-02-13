@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './css/commande.css';
 
 export default function CommandeForm({ produits }) {
     const [step, setStep] = useState(1);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [delai, setDelai] = useState('');
+    const [searchData, setSearchData] = useState('')
+    const [filteredProducts, setFilteredProducts] = useState(produits)
+
+    useEffect(()=> {
+        setFilteredProducts(produits.filter(product => product.nom.toLowerCase().includes(searchData.toLowerCase())))
+    },[searchData])
 
 
     const itemsPerPage = 16; // Nombre de produits par page
@@ -13,8 +19,9 @@ export default function CommandeForm({ produits }) {
     // Calculer les indices de début et fin pour la pagination
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentProduits = produits.slice(indexOfFirstItem, indexOfLastItem);
+    let currentProduits = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(produits.length / itemsPerPage);
+
 
 
 
@@ -73,6 +80,7 @@ export default function CommandeForm({ produits }) {
 
             {step === 1 && (
                 <>
+                <input className='searchbar' type="text" value={searchData} onChange={(e)=>setSearchData(e.target.value)} placeholder='🔎 Entrez le nom du produit..' />
                 <div className="products-grid">
                     {currentProduits.map(produit => (
                         <div key={produit.code_produit} className="product-card">

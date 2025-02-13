@@ -18,10 +18,10 @@ export default function MesCommandes(){
                 <h1>Gestion des Commandes</h1>
 
                 <div className="commandes-nav">
-                    <button onClick={()=>setNavChoice('commandes')} >
+                    <button className={navChoice==='commandes' ? 'active' : ''} onClick={()=>setNavChoice('commandes')} >
                         Mes commandes
                     </button>
-                    <button onClick={()=>setNavChoice('lancer commande')}>
+                    <button className={navChoice==='lancer commande' ? 'active' : ''} onClick={()=>setNavChoice('lancer commande')}>
                         Lancer Commande
                     </button>
                 </div>
