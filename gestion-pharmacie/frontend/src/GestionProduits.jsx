@@ -15,7 +15,7 @@ export default function GestionProduits(){
     const itemsPerPage = 6;
     const totlalPages = Math.ceil(filteredProduits.length / itemsPerPage);
 
-    console.log(selected)
+    
 
 
    

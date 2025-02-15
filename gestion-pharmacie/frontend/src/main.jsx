@@ -14,6 +14,7 @@ import GestionProduits from './GestionProduits'
 import {loader} from './HomeLayout'
 import ProductForm , {loader as typesLoader} from './ProductForm'
 import LotForm, {loader as LotFromLoader} from './LotForm'
+import DetailsCommande from './DetailsCommande'
 
 const router = createBrowserRouter([
   {
@@ -77,7 +78,13 @@ const router = createBrowserRouter([
             children : [
               {
                 path : 'mes-commandes' , 
-                element : <MesCommandes />
+                element : <MesCommandes /> , 
+                children : [
+                  {
+                    path : 'details' , 
+                    element : <DetailsCommande/>
+                  }
+                ]
               }
             ]
           }

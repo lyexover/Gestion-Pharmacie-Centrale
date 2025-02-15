@@ -1,6 +1,5 @@
 export default function Card({data, type}){
 
-    console.log( type)
 
     return (
         <div className="stock-card">

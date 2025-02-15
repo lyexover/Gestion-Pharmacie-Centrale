@@ -28,7 +28,7 @@ export async function loader() {
   const token = localStorage.getItem('token');
 
   try {
-      const [productsResponse, commandesResponse] = await Promise.all([
+      const [productsResponse, commandesResponse, commandeProduitsResponse] = await Promise.all([
           fetch('http://localhost:3000/api/products', {
               headers: {
                   'Content-Type': 'application/json',
@@ -39,22 +39,31 @@ export async function loader() {
               headers: {
                   'Authorization': `Bearer ${token}`
               }
-          })
+          }) , 
+          fetch('http://localhost:3000/api/commandeProduits' , 
+            {
+                headers : {
+                    'Authorization' : `Bearer ${token}`
+                }
+            }
+          )
       ]);
 
-      if (!productsResponse.ok || !commandesResponse.ok) {
+      if (!productsResponse.ok || !commandesResponse.ok || !commandeProduitsResponse.ok) {
           throw new Error('Échec du chargement des données');
       }
 
-      const [productsData, commandesData] = await Promise.all([
+      const [productsData, commandesData, commandeProduitsData] = await Promise.all([
           productsResponse.json(),
-          commandesResponse.json()
+          commandesResponse.json(), 
+          commandeProduitsResponse.json()
       ]);
 
       return {
           produits: productsData.produits || [],
           lots: productsData.lots || [],
-          commandes: commandesData || []
+          commandes: commandesData || [] , 
+          commandeProduits : commandeProduitsData || []
       };
 
   } catch (err) {
@@ -62,7 +71,8 @@ export async function loader() {
       return {
           produits: [],
           lots: [],
-          commandes: []
+          commandes: [] , 
+          commandeProduits :  []
       };
   }
 }

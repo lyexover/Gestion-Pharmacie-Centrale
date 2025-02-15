@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useRouteLoaderData } from "react-router-dom"
+import { useRouteLoaderData, Link, Outlet } from "react-router-dom"
 import { useAuth } from "./AuthContext"
 import CommandeForm from './CommandeForm'
 import './css/commande.css'
@@ -11,6 +11,7 @@ export default function MesCommandes(){
     const {user} = useAuth()
     const {commandes, produits} = useRouteLoaderData('parent')
 
+    console.log(commandes)
 
     return (
         <div>
@@ -35,6 +36,7 @@ export default function MesCommandes(){
                            <thead>
                               <tr>
                                   <th>ID</th>
+                                  <th>ID-Admin</th>
                                   <th>Date</th>
                                   <th>Statut</th>
                                   <th>Actions</th>
@@ -48,16 +50,17 @@ export default function MesCommandes(){
                                     </tr>
                                 ) : 
                                 (
-                                    commandes.map((commande, index) => {
+                                    commandes.map((commande, index) => (
                                         <tr key={index}>
                                              <td>{commande.id_commande}</td>
-                                             <td>{commande.date_commande}</td>
+                                             <td>{commande.id_admin_base}</td>
+                                             <td>{commande.date_commande.split('T')[0]}</td>
                                              <td>{commande.statut}</td>
-                                             <td><button>Details</button></td>
+                                             <td><Link to={'details'} className="details-btn" state={{commande}}>Details</Link></td>
                                         </tr>
 
 
-                                    })
+                                    ))
                                 )
 
                             }
@@ -67,7 +70,6 @@ export default function MesCommandes(){
                 )
             }
 
-
             {
                 navChoice === 'lancer commande' && (
                     <CommandeForm produits={produits} />
@@ -75,6 +77,7 @@ export default function MesCommandes(){
             }
 
 
+               <Outlet/>
             
         </div>
     )

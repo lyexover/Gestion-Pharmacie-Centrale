@@ -50,7 +50,7 @@ export default function CommandeForm({ produits }) {
         }
     };
 
-console.log(user.id ,user.region, delai, selectedProducts)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
