@@ -142,7 +142,7 @@
 .stock-card {
   background-color: var(--color-white);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1.4rem;
   box-shadow: 0 2px 8px rgba(0, 41, 107, 0.1);
   transition: all 0.2s ease;
   display: flex;
@@ -157,7 +157,38 @@
 
 .stock-card-header {
   border-bottom: 1px solid var(--color-gray);
-  padding-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-card-header .right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stock-card-header .delete-btn {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: red;
+}
+.stock-card-header .delete-btn:hover {
+  background-color: rgb(213, 213, 213);
+  border-radius: 5px;
+}
+
+.stock-card-header .edit-btn:hover {
+  background-color: rgb(213, 213, 213);
+  border-radius: 5px;
+}
+
+.stock-card-header .delete-btn,
+.stock-card-header .edit-btn {
+  font-size: 1.2rem;
+  padding: 0.3rem;
 }
 
 .stock-card-title {

@@ -63,21 +63,19 @@
   text-decoration: none;
   color: white;
   font-weight: 550;
-  margin-left: 0.6rem;
   display: block;
   width: 100%;
-  border-radius: 0.6rem;
   font-size: 1.18rem;
-  padding: 0.8rem 0 0.8rem 0.5rem;
+  padding: 0.8rem 0 0.8rem 1rem;
   transition: 0.2s ease;
 }
 
 .nav ul li .active {
-  background-color: var(--color-secondary);
+  background-color: #00b3ffa4;
 }
 
 .nav ul li .link:hover {
-  background-color: var(--color-secondary);
+  background-color: #00b3ff93;
 }
 
 .log-info {
