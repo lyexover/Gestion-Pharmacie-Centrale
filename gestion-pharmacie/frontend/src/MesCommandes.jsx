@@ -11,7 +11,7 @@ export default function MesCommandes(){
     const {user} = useAuth()
     const {commandes, produits} = useRouteLoaderData('parent')
 
-    console.log(commandes)
+    console.log(commandes , produits)
 
     return (
         <div>

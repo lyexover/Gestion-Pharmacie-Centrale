@@ -16,7 +16,7 @@ export default function Card({data, type}){
 
         try {
 
-                if(type === 'produits' && data.total_quantite == 0) throw new Error('Ce produit contient des lots')
+                if(type === 'produits' && data.total_quantite > 0) throw new Error('Ce produit contient des lots')
                 const response = await fetch(route , {
                     method : 'DELETE' , 
                      headers : {
@@ -40,6 +40,7 @@ export default function Card({data, type}){
     }
 
 
+
     return (
         <div className="stock-card">
             <div className="stock-card-header">
@@ -49,7 +50,7 @@ export default function Card({data, type}){
                 </div>
                 <div className="right">
                     <button className="delete-btn" onClick={()=>handleDelete(data)}><i class="fa-solid fa-trash"></i></button>
-                    <Link className='edit-btn'><i class="fa-solid fa-pen-to-square"></i></Link>
+                    <Link to={ type === 'produits' ? 'ajouter-produit' : 'ajouter-Lot'} state={{data}} className='edit-btn'><i class="fa-solid fa-pen-to-square"></i></Link>
                 </div>
             </div>
             

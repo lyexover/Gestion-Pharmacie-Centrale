@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate ,useRevalidator } from "react-router-dom";
+import { useLoaderData, useNavigate ,useRevalidator, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 export async function loader(){
@@ -33,12 +33,18 @@ export default function ProductForm() {
     const {classes, types} = useLoaderData();
     const revalidator = useRevalidator();
     const navigate = useNavigate();
+    const location = useLocation()
+    const data =location.state?.data || {}
+    
+    
+
 
    const [formData , setFormData] = useState({
-         nom : '',
-         description : '',
-         classe : '',
-         type : ''
+         code_produit : data.code_produit || '' , 
+         nom : data.nom || '',
+         description : data.description ||'',
+         classe : data.id_classe ||'',
+         type : data.id_type || ''
    })
 
    
@@ -49,9 +55,11 @@ export default function ProductForm() {
 
    async function handleSubmit(e){
        e.preventDefault();
+
+       const method = Object.keys(data).length > 0 ? 'PUT' : 'POST'
        try{
               const response = await fetch('http://localhost:3000/api/products' , {
-                method: 'POST',
+                method: method,
                 headers: {
                      'Content-Type': 'application/json',
                      'Authorization': `Bearer ${localStorage.getItem('token')}`

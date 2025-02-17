@@ -6,8 +6,9 @@ const verifyRole = require("../middlewares/verifyRole");
 
 router.get('/commandes', verifyRole(['superAdmin', 'admin_base']), async (req, res) => {
     try {
-        const query = `SELECT * FROM commandes NATURAL JOIN commande_produits`;
+        const query = `SELECT * FROM commandes `;
         const [results] = await db.query(query);
+        
         return res.json(results);
     } catch (err) {
         return res.status(500).json({ message: 'db error' });
@@ -59,7 +60,7 @@ router.post('/commandes', verifyRole(['admin_base']), async (req, res) => {
 
 router.get('/commandeProduits', verifyRole(['superAdmin', 'gestionnaire-stock', 'admin_base']), async (req, res) => {
     try {
-        const [commandeProduits] = await db.query('SELECT * FROM commande_produits NATURAL JOIN PRODUITS');
+        const [commandeProduits] = await db.query('SELECT * FROM commande_produits NATURAL JOIN produits');
         return res.json(commandeProduits);
     } catch (err) {
         res.status(500).json({ message: "Erreur serveur", err });

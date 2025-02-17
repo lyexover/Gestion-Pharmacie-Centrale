@@ -142,7 +142,7 @@
 .stock-card {
   background-color: var(--color-white);
   border-radius: 8px;
-  padding: 1.4rem;
+  padding: 1.2rem;
   box-shadow: 0 2px 8px rgba(0, 41, 107, 0.1);
   transition: all 0.2s ease;
   display: flex;

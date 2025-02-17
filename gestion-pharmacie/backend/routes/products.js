@@ -20,8 +20,11 @@ router.get('/products', verifyRole(['superAdmin', 'gestionnaire_stock', 'admin_b
             SELECT
                    p.code_produit, 
                    p.nom, 
+                   p.description,
                    c.nom_classe, 
                    t.nom_type, 
+                   t.id_type , 
+                   c.id_classe,
                    COALESCE(SUM(l.quantite_disponible), 0) AS total_quantite
             FROM Produits p
             LEFT JOIN Lots l ON p.code_produit = l.code_produit 
@@ -67,6 +70,66 @@ router.get('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async (
         });
     } catch (err) {
         res.status(500).json({ message: 'db error' });
+    }
+});
+
+
+router.put('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async (req, res) => {
+    try {
+        const { 
+            
+            id_lot,
+            quantite_disponible, 
+            date_fabrication, 
+            date_peremption, 
+            id_fournisseur 
+        } = req.body;
+
+        // Vérifier si le lot existe
+        const [existing] = await db.query(
+            'SELECT * FROM lots WHERE id_lot = ?',
+            [id_lot]
+        );
+        
+        if (existing.length === 0) {
+            return res.status(404).json({ message: 'Lot non trouvé' });
+        }
+
+        // Mettre à jour le lot
+        const query = `
+            UPDATE lots 
+            SET quantite_disponible = ?,
+                date_fabrication = ?,
+                date_peremption = ?,
+                id_fournisseur = ?
+            WHERE id_lot = ?
+        `;
+
+        await db.query(query, [
+            quantite_disponible,
+            date_fabrication,
+            date_peremption,
+            id_fournisseur,
+            id_lot
+        ]);
+
+        res.json({ 
+            message: `Lot ${id_lot} mis à jour avec succès`,
+            updatedLot: {
+                id_lot,
+                quantite_disponible,
+                date_fabrication,
+                date_peremption,
+                id_fournisseur
+            }
+        });
+
+    } catch (err) {
+        console.error('Erreur lors de la mise à jour du lot:', err.stack);
+        res.status(500).json({ 
+            message: 'Erreur lors de la mise à jour du lot',
+            error: err.message 
+        });
     }
 });
 
@@ -145,5 +208,35 @@ router.delete(
       }
     }
   );
+
+
+
+  router.put(
+    "/products",
+    verifyRole(["superAdmin", "gestionnaire_stock"]),
+    async (req, res) => {
+      try {
+        const { code_produit, nom, description, classe, type } = req.body;
+  
+        const [existing] = await db.query(
+          "SELECT * FROM produits WHERE code_produit = ?",
+          [code_produit]
+        );
+        if (existing.length === 0) {
+          return res.status(404).json({ message: "Produit non trouvé" });
+        }
+  
+        const query = `UPDATE produits 
+                         SET nom = ?, description = ?, classe = ?, id_type = ?
+                         WHERE code_produit = ?`;
+        await db.query(query, [nom, description, classe, type, code_produit]);
+  
+        res.json({ message: `Produit ${code_produit} mis à jour avec succès` });
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    }
+  );
+
 
 module.exports = router;
