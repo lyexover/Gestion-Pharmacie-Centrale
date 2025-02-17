@@ -17,7 +17,8 @@ router.post('/products', verifyRole(['superAdmin', 'gestionnaire_stock']), async
 router.get('/products', verifyRole(['superAdmin', 'gestionnaire_stock', 'admin_base']), async (req, res) => {
     try {
         const query = `
-            SELECT p.code_produit, 
+            SELECT
+                   p.code_produit, 
                    p.nom, 
                    c.nom_classe, 
                    t.nom_type, 
@@ -85,31 +86,64 @@ router.post('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async 
     }
 });
 
-router.delete('/lot',verifyRole(['superAdmin','gestionnaire_stock']),async (req, res) => {
-    const{id_lot,quantite_disponible,id_utilisateur}= req.body;
+router.delete('/lot', verifyRole(['superAdmin', 'gestionnaire_stock']), async (req, res) => {
+    const { id_lot, quantite_disponible, id_utilisateur } = req.body;
     let connection;
-    try{
+    
+    try {
         connection = await db.getConnection();
         await connection.beginTransaction();
-        const query = 'DELETE FROM lots WHERE id_lot = ? ';8
-        const [result]=await db.query(query,[id_lot])
-        const query2 = 'INSERT INTO eliminations(id_lot,id_utilisateur,quantite_eliminee) VALUES (?, ?, ?) ';
-        const [result2]=await db.query(query,[id_lot,id_utilisateur,quantite_disponible]);
+
+        // 1. D'abord, insérer l'enregistrement d'élimination
+        const insertQuery = 'INSERT INTO eliminations(id_lot, id_utilisateur, quantite_eliminee) VALUES (?, ?, ?)';
+        await db.query(insertQuery, [id_lot, id_utilisateur, quantite_disponible]);
+
+        // 2. Ensuite, supprimer le lot
+        const deleteQuery = 'DELETE FROM lots WHERE id_lot = ?';
+        await db.query(deleteQuery, [id_lot]);
+
+        // Si tout s'est bien passé, on valide la transaction
         await connection.commit();
-        return result.json({message:'lot suprimee avec successful'})
-    }catch(err){
-        if (connection){
+        return res.json({ message: 'Lot supprimé avec succès' });
+
+    } catch (err) {
+        if (connection) {
             await connection.rollback();
-           
         }
-    
-        console.error('Error rolling back transaction', err.stack);
-        res.json({message : 'erreur lors de la connection'})
-    }finally{
-        if (connection){
+        console.error('Erreur lors de la transaction:', err.stack);
+        return res.status(500).json({ message: 'Erreur lors de la suppression du lot' });
+    } finally {
+        if (connection) {
             await connection.release();
         }
     }
-})
+});
+
+
+
+router.delete(
+    "/products/delete",
+    verifyRole(["superAdmin" , 'gestionnaire_stock']),
+    async (req, res) => {
+      try {
+        const { code_produit } = req.body;
+  
+        const [existing] = await db.query(
+          "SELECT * FROM produits WHERE code_produit = ?",
+          [code_produit]
+        );
+        if (existing.length === 0) {
+          return res.status(404).json({ message: "Produit non trouvé" });
+        }
+  
+        const query = "DELETE FROM produits WHERE code_produit = ?";
+        await db.query(query, [code_produit]);
+  
+        res.json({ message: `Produit ${code_produit} supprimé avec succès` });
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    }
+  );
 
 module.exports = router;

@@ -75,13 +75,4 @@ router.post("/signup", async (req, res) => {
 
 
 
-async function hashPassword(password) {
-    const saltRounds = 10; // Nombre de tours de salage
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    return hashedPassword;
-}
-
-// Exemple d'utilisation
-hashPassword('secretKey').then(console.log);
-
 module.exports = router;
