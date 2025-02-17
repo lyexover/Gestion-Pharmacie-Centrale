@@ -85,4 +85,31 @@ router.post('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async 
     }
 });
 
+router.delete('/lot',verifyRole(['superAdmin','gestionnaire_stock']),async (req, res) => {
+    const{id_lot,quantite_disponible,id_utilisateur}= req.body;
+    let connection;
+    try{
+        connection = await db.getConnection();
+        await connection.beginTransaction();
+        const query = 'DELETE FROM lots WHERE id_lot = ? ';8
+        const [result]=await db.query(query,[id_lot])
+        const query2 = 'INSERT INTO eliminations(id_lot,id_utilisateur,quantite_eliminee) VALUES (?, ?, ?) ';
+        const [result2]=await db.query(query,[id_lot,id_utilisateur,quantite_disponible]);
+        await connection.commit();
+        return result.json({message:'lot suprimee avec successful'})
+    }catch(err){
+        if (connection){
+            await connection.rollback();
+           
+        }
+    
+        console.error('Error rolling back transaction', err.stack);
+        res.json({message : 'erreur lors de la connection'})
+    }finally{
+        if (connection){
+            await connection.release();
+        }
+    }
+})
+
 module.exports = router;
