@@ -53,7 +53,7 @@ router.post('/commandes', verifyRole(['admin_base']), async (req, res) => {
         console.error(err);
         res.status(500).json({ message: 'Erreur lors de la création de la commande' });
     } finally {
-        if (connection) connection.release();
+        if (connection)  connection.release();
     }
 });
 
