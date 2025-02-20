@@ -11,31 +11,37 @@ const fonctionalites = {
     superAdmin : [
         {
             path : 'gestion-utilisateurs' , 
-            label : 'Gestion Utilisateurs'
+            label : 'Gestion Utilisateurs' , 
+            icon : <i class="fa-solid fa-users"></i>
         } , 
         {
             path : 'gestion-stock' , 
-            label : 'Gestion Stock'
+            label : 'Gestion Stock' , 
+            icon : <i className="fa-solid fa-warehouse"></i>
         } , 
         {
             path : 'mes-commandes' , 
-            label : 'Mes Commandes'
+            label : 'Mes Commandes' , 
+            icon : <i class="fa-solid fa-truck-fast"></i>
         } , 
         {
             path : 'Dashboard' , 
-            label : 'Dashboard'
+            label : 'Dashboard' , 
+            icon : <i class="fa-solid fa-chart-pie"></i>
         }
     ] , 
     gestionnaire_stock : [
         {
             path : 'gestion-stock' , 
-            label : 'Gestion Stock'
+            label : 'Gestion Stock' , 
+            icon : <i className="fa-solid fa-warehouse"></i>
         }
     ] , 
     admin_base : [
         {
             path : 'mes-commandes' , 
-            label : 'Mes Commandes'
+            label : 'Mes Commandes' , 
+            icon : <i class="fa-solid fa-truck-fast"></i>
         }
     ]
 }
@@ -55,7 +61,7 @@ return (
                     <li key={index}>
                         <Link onClick={()=>setClicked(fonctionalite.label)}
                          className={`link ${clicked === fonctionalite.label ? 'active' : ''}`}
-                          to={`/${user.role}/${fonctionalite.path}`}>{fonctionalite.label}</Link>
+                          to={`/${user.role}/${fonctionalite.path}`}> <span className="icon">{fonctionalite.icon}</span> { fonctionalite.label}</Link>
                     </li>
                 ))
             }

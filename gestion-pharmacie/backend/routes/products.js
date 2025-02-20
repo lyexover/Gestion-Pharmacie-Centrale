@@ -135,14 +135,14 @@ router.put('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async (
 
 router.post('/lotForm', verifyRole(['superAdmin', 'gestionnaire_stock']), async (req, res) => {
     try {
-        const {id_produit, date_fabrication, date_peremption, id_fournisseur, quantite} = req.body;
+        const {id_produit, date_fabrication, date_peremption, id_fournisseur, quantite_disponible} = req.body;
         
         const query = `
             INSERT INTO lots (quantite_disponible, date_fabrication, date_peremption, id_fournisseur, code_produit)
             VALUES (?, ?, ?, ?, ?)
         `;
         
-        const [result] = await db.query(query, [quantite, date_fabrication, date_peremption, id_fournisseur, id_produit]);
+        const [result] = await db.query(query, [quantite_disponible, date_fabrication, date_peremption, id_fournisseur, id_produit]);
         res.json({ message: 'added successfully', id: result.insertId });
     } catch (err) {
         res.status(500).json({ message: 'db error' });

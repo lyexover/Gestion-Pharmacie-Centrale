@@ -56,7 +56,7 @@
 
 .nav ul li {
   width: 100%;
-  margin: 0.5rem 0;
+  margin: 0.6rem 0;
 }
 
 .nav ul li .link {
@@ -110,6 +110,10 @@
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
+}
+
+.icon {
+  margin-right: 0.23rem;
 }
 
 @media screen and (max-width: 1200px) {

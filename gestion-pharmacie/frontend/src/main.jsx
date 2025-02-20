@@ -15,6 +15,7 @@ import {loader} from './HomeLayout'
 import ProductForm , {loader as typesLoader} from './ProductForm'
 import LotForm, {loader as LotFromLoader} from './LotForm'
 import DetailsCommande from './DetailsCommande'
+import ConfirmDelete from "./ConfirmDelete"
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
                     path : 'ajouter-Lot', 
                     element : <LotForm/>, 
                     loader : LotFromLoader
+                  } , 
+                  {
+                    path : 'confirmer-suppression' ,
+                    element : <ConfirmDelete/>
                   }
                 ]
               }
