@@ -16,6 +16,7 @@ import ProductForm , {loader as typesLoader} from './ProductForm'
 import LotForm, {loader as LotFromLoader} from './LotForm'
 import DetailsCommande from './DetailsCommande'
 import ConfirmDelete from "./ConfirmDelete"
+import Commandes_super from './Commandes_super'
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
                     element : <ConfirmDelete/>
                   }
                 ]
+              } , 
+              {
+                path : 'commandes-super' , 
+                element : <Commandes_super/>
               }
             ]
           } , 

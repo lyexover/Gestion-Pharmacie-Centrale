@@ -20,7 +20,7 @@ const fonctionalites = {
             icon : <i className="fa-solid fa-warehouse"></i>
         } , 
         {
-            path : 'mes-commandes' , 
+            path : 'commandes-super' , 
             label : 'Mes Commandes' , 
             icon : <i class="fa-solid fa-truck-fast"></i>
         } , 

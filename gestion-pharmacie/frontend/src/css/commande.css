@@ -540,3 +540,22 @@
     padding: 0.75rem;
   }
 }
+
+/* super Commandes ===========================================================*/
+
+.supercommandes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 41, 107, 0.1);
+}
+.supercommandes-header h1 {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+}
+
+.supercommande-container {
+  padding: 1.2rem;
+}
