@@ -5,6 +5,7 @@ export default function DetailsCommande() {
     const { commande } = useLocation().state || {};
     const { commandeProduits } = useRouteLoaderData('parent');
     const navigate = useNavigate();
+  
 
     // Filtrer les produits de la commande
     const produitsCommande = commandeProduits.filter(

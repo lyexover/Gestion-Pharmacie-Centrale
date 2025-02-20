@@ -6,7 +6,7 @@ const verifyRole = require("../middlewares/verifyRole");
 
 router.get('/commandes', verifyRole(['superAdmin', 'admin_base']), async (req, res) => {
     try {
-        const query = `SELECT * FROM commandes `;
+        const query = `SELECT * FROM commandes NATURAL JOIN regions`;
         const [results] = await db.query(query);
         
         return res.json(results);

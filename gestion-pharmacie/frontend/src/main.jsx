@@ -66,7 +66,13 @@ const router = createBrowserRouter([
               } , 
               {
                 path : 'commandes-super' , 
-                element : <Commandes_super/>
+                element : <Commandes_super/> , 
+                children : [
+                  {
+                    path : 'details' , 
+                    element : <DetailsCommande/>
+                  }
+                ]
               }
             ]
           } , 

@@ -559,3 +559,18 @@
 .supercommande-container {
   padding: 1.2rem;
 }
+
+.en-attente {
+  color: red;
+  font-weight: 550;
+}
+
+.en-cours {
+  color: var(--color-secondary);
+  font-weight: 550;
+}
+
+.livree {
+  color: rgb(23, 90, 23);
+  font-weight: 550;
+}

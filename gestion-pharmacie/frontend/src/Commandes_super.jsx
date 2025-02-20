@@ -1,15 +1,28 @@
+import { useMemo } from 'react'
 import './css/commande.css'
+import { useRouteLoaderData, Link, Outlet } from 'react-router-dom'
+import { useState } from 'react'
 
 export default function Commandes_super(){
 
+const {commandes} = useRouteLoaderData('parent')
+const [selectedFilter, setSelectedFilter] = useState('')
+const [filteredCommandes, setFilteredCommandes] = useState(commandes) || []
 
+useMemo(() => {
+    if(selectedFilter === ''){
+        setFilteredCommandes(commandes)
+    }else{
+        setFilteredCommandes(commandes.filter(commande => commande.statut === selectedFilter))
+    }
+}, [selectedFilter])
 
     return (
         <div className='supercommande-container'>
             <div className="supercommandes-header">
                <h1>Commandes reçues</h1>
             
-              <select name="statut">
+              <select name="statut" onChange={(e)=>setSelectedFilter(e.target.value)} >
                 <option value="">Choisir un filtre..</option>
                 <option value="en attente">en attente</option>
                 <option value="en cours de traitement">en cours de traitement</option>
@@ -31,12 +44,26 @@ export default function Commandes_super(){
                         </tr>
                     </thead>
                     <tbody>
-
+                       {
+                        filteredCommandes.map((commande)=> (
+                            <tr key={commande.id_commande} >
+                                <td>{commande.id_commande}</td>
+                                <td>{commande.nom_region}</td>
+                                <td>{commande.date_commande.split('T')[0]}</td>
+                                <td className={commande.statut === 'en attente' ? 'en-attente' : commande.statut === 'en cours de traitement' ? 'en-cours' : 'livree'} >
+                                    {commande.statut}
+                                </td>
+                                <td>{commande.delai} jours</td>
+                                <td><Link to={'details'} className="details-btn" state={{commande}}>Details</Link></td>
+                            </tr>
+                        ))
+                       }
                     </tbody>
                  </table>
 
             </div>
             
+            <Outlet/>
         </div>
     )
 }

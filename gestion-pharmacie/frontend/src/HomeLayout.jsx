@@ -62,7 +62,7 @@ export async function loader() {
       return {
           produits: productsData.produits || [],
           lots: productsData.lots || [],
-          commandes: commandesData || [] , 
+          commandes: commandesData.reverse() || [] , 
           commandeProduits : commandeProduitsData || []
       };
 
