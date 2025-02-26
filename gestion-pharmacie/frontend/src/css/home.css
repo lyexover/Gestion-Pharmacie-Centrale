@@ -37,7 +37,7 @@
 .logout-btn {
   margin-top: auto;
   padding: 0.5rem 0;
-  background-color: #c54234;
+  background-color: #0483b9;
   color: white;
   font-weight: 550;
   cursor: pointer;
@@ -45,7 +45,7 @@
 }
 
 .logout-btn:hover {
-  background-color: #b03a2e;
+  background-color: #08a0e1;
 }
 
 .nav ul {
@@ -57,6 +57,7 @@
 .nav ul li {
   width: 100%;
   margin: 0.6rem 0;
+  position: relative;
 }
 
 .nav ul li .link {
@@ -71,32 +72,19 @@
 }
 
 .nav ul li .active {
-  background-color: #00b3ffa4;
+  background-color: #00b3ff5f;
 }
 
 .nav ul li .link:hover {
-  background-color: #00b3ff93;
+  background-color: #00b3ff3c;
 }
 
-.log-info {
-  background-color: rgb(237, 237, 237);
-  width: 100%;
-  font-size: 1rem;
-  padding: 0.32rem;
-  text-align: end;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.log-info p {
-  position: relative;
-  right: 1rem;
-}
-
-.log-info span {
-  font-weight: 550;
-  color: var(--color-primary);
+.alert-indicator {
+  position: absolute;
+  top: 0.8rem;
+  right: 1.1rem;
+  color: red;
+  font-size: 8px;
 }
 
 .home-content {

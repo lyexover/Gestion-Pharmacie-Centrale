@@ -1,11 +1,12 @@
 import { useAuth } from "./AuthContext";
+import { useAlert } from "./AlertContext"; // Ajout de l'import
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function Nav() {
 const {user, logout} = useAuth();     
 const [clicked, setClicked] = useState('');
-
+const { stockAlert, perimeAlert } = useAlert(); // Récupération des états d'alerte
 
 const fonctionalites = {
     superAdmin : [
@@ -46,8 +47,6 @@ const fonctionalites = {
     ]
 }
 
-
-
 return (
     <div className="nav">
         <div className="nav-logo">
@@ -61,7 +60,13 @@ return (
                     <li key={index}>
                         <Link onClick={()=>setClicked(fonctionalite.label)}
                          className={`link ${clicked === fonctionalite.label ? 'active' : ''}`}
-                          to={`/${user.role}/${fonctionalite.path}`}> <span className="icon">{fonctionalite.icon}</span> { fonctionalite.label}</Link>
+                          to={`/${user.role}/${fonctionalite.path}`}> 
+                            <span className="icon">{fonctionalite.icon}</span> 
+                            { fonctionalite.label}
+                            {(stockAlert || perimeAlert) && fonctionalite.label === 'Gestion Stock' && (
+                                <i className="fa-solid fa-circle alert-indicator"></i>
+                            )}
+                        </Link>
                     </li>
                 ))
             }

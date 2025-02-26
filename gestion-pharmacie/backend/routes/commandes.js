@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require("../db");
 const verifyRole = require("../middlewares/verifyRole");
 
-router.get('/commandes', verifyRole(['superAdmin', 'admin_base']), async (req, res) => {
+router.get('/commandes', verifyRole(['superAdmin', 'admin_base', 'gestionnaire_stock']), async (req, res) => {
     try {
         const query = `SELECT * FROM commandes NATURAL JOIN regions`;
         const [results] = await db.query(query);
@@ -58,7 +58,7 @@ router.post('/commandes', verifyRole(['admin_base']), async (req, res) => {
     }
 });
 
-router.get('/commandeProduits', verifyRole(['superAdmin', 'gestionnaire-stock', 'admin_base']), async (req, res) => {
+router.get('/commandeProduits', verifyRole(['superAdmin', 'gestionnaire_stock', 'admin_base']), async (req, res) => {
     try {
         const [commandeProduits] = await db.query('SELECT * FROM commande_produits NATURAL JOIN produits');
         return res.json(commandeProduits);

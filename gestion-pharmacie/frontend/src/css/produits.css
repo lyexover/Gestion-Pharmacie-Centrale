@@ -71,6 +71,15 @@
 .nav-group {
   display: flex;
   gap: 1rem;
+  position: relative;
+}
+
+.nav-group span {
+  font-size: 0.4rem;
+  padding-left: 0.4rem;
+  position: absolute;
+  top: 3px;
+  color: red;
 }
 
 .stock-nav button {
@@ -227,6 +236,35 @@
   color: var(--color-secondary);
   font-weight: var(--font-medium);
   font-size: 1.1rem;
+}
+.quantite-container,
+.perime-container {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.stock-alert,
+.perime-alert {
+  font-size: 1.3rem;
+  color: red;
+  animation: alert 1s ease infinite;
+}
+
+.perime-card {
+  box-shadow: 0 2px 8px rgba(189, 4, 16, 0.373);
+}
+
+@keyframes alert {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .stock-card-date {

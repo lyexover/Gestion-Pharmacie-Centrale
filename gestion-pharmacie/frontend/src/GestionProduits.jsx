@@ -2,7 +2,7 @@ import {Link, useRouteLoaderData, Outlet, useRevalidator} from 'react-router-dom
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import './css/produits.css'
-
+import { useAlert } from './AlertContext';
 
 export default function GestionProduits(){
 
@@ -15,7 +15,10 @@ export default function GestionProduits(){
     const itemsPerPage = 6;
     const totlalPages = Math.ceil(filteredProduits.length / itemsPerPage);
 
+    const {stockAlert, perimeAlert} = useAlert();
+
     
+    console.log(produits, lots);
 
 
    
@@ -54,8 +57,8 @@ export default function GestionProduits(){
         />
     </div>
     <div className="nav-group">
-        <button className={selected === 'produits' ? 'active' : ''} onClick={() => setSelected('produits')}>Vue Produits</button>
-        <button className={selected === 'lots' ? 'active' : ''} onClick={() => setSelected('lots')}>Vue Lots</button>
+        <button className={selected === 'produits' ? 'active' : ''} onClick={() => setSelected('produits')}>Vue Produits {stockAlert && <span><i class="fa-solid fa-circle"></i></span>} </button>
+        <button className={selected === 'lots' ? 'active' : ''} onClick={() => setSelected('lots')}>Vue Lots {perimeAlert && <span><i class="fa-solid fa-circle"></i></span>}</button>
     </div>
 </div>
 

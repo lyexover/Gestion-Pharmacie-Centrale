@@ -7,15 +7,14 @@ export default function Commandes_super(){
 
 const {commandes} = useRouteLoaderData('parent')
 const [selectedFilter, setSelectedFilter] = useState('')
-const [filteredCommandes, setFilteredCommandes] = useState(commandes) || []
 
-useMemo(() => {
-    if(selectedFilter === ''){
-        setFilteredCommandes(commandes)
-    }else{
-        setFilteredCommandes(commandes.filter(commande => commande.statut === selectedFilter))
-    }
-}, [selectedFilter])
+
+const filteredCommandes = useMemo(() => {
+    return selectedFilter === ''
+        ? commandes
+        : commandes.filter(commande => commande.statut === selectedFilter);
+}, [selectedFilter, commandes]); 
+
 
     return (
         <div className='supercommande-container'>

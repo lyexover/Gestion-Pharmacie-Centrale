@@ -17,6 +17,7 @@ import LotForm, {loader as LotFromLoader} from './LotForm'
 import DetailsCommande from './DetailsCommande'
 import ConfirmDelete from "./ConfirmDelete"
 import Commandes_super from './Commandes_super'
+import { AlertProvider } from './AlertContext'
 
 const router = createBrowserRouter([
   {
@@ -83,8 +84,24 @@ const router = createBrowserRouter([
             children : [
               {
                 path : 'gestion-stock' , 
-                element : <GestionStock />
-              }
+                element : <GestionProduits /> ,
+                children : [
+                  {
+                    path : 'ajouter-produit' , 
+                    element : <ProductForm /> , 
+                    loader : typesLoader
+                  } , 
+                  {
+                    path : 'ajouter-Lot', 
+                    element : <LotForm/>, 
+                    loader : LotFromLoader
+                  } , 
+                  {
+                    path : 'confirmer-suppression' ,
+                    element : <ConfirmDelete/>
+                  }
+                ]
+              } 
             ]
           } , 
 
@@ -114,7 +131,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <AlertProvider>
+       <RouterProvider router={router} />
+      </AlertProvider>
     </AuthProvider>
   </StrictMode>
 );
