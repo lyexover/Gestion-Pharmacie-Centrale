@@ -5,26 +5,16 @@ import { useState, useEffect } from "react"
 import { SpaceIcon } from "lucide-react"
 
 export default function Card({data, type}) {
-   const {setStockAlert, setPerimeAlert} = useAlert();
+   const {stockItems, perimeItems} = useAlert();
    
    // Added variable to check if the product is expired
-   const isExpired = type === 'lots' && Date.now() > new Date(data.date_peremption);
-   const isLowStock = type === 'produits' && data.total_quantite < 10;
+   const isExpired = type === 'lots' && perimeItems.includes(data);
+   const isLowStock = type === 'produits' && stockItems.includes(data);
    
-   useEffect(() => {
-     // Check and set stock alert if necessary
-     if (isLowStock) {
-       setStockAlert(true);
-     }
-     
-     // Check and set expiration alert if necessary
-     if (isExpired) {
-       setPerimeAlert(true);
-     }
-   }, [data, type, setStockAlert, setPerimeAlert, isLowStock, isExpired]);
+ 
 
     return (
-        <div className={`stock-card ${isExpired ? 'perime-card' : ''}`}>
+        <div className={`stock-card ${isExpired || isLowStock ? 'perime-card' : ''}`}>
             <div className="stock-card-header">
                 <div>
                   <h3 className="stock-card-title">{data.nom}</h3>
@@ -51,7 +41,7 @@ export default function Card({data, type}) {
                         <p className="stock-card-quantity">Quantite : {data.quantite_disponible}</p>
                         <div className="perime-container">
                           <p className="stock-card-date">Date peremption : {new Date(data.date_peremption).toLocaleDateString()}</p>
-                          {isExpired && <span className="perime-alert"><i className="fa-solid fa-xmark"></i></span>}
+                          {isExpired && <span className="perime-alert"><i class="fa-solid fa-hourglass-end"></i></span>}
                         </div>
                     </div>
                 )}

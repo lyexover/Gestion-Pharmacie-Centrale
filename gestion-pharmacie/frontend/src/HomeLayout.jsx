@@ -1,12 +1,20 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useLoaderData } from "react-router-dom"
 import './css/home.css'
 import Nav from "./Nav"
 import { useAuth } from "./AuthContext"
+import { useAlert } from "./AlertContext"
+import { useEffect } from "react"
 
 
 
 export default function HomeLayout() {
    const {user} = useAuth();
+   const {produits , lots} = useLoaderData();
+   const {updateData} = useAlert();
+
+   useEffect(() => {
+     updateData({products: produits, lots: lots});
+   }, [produits, lots]);
 
    return (
     <div className="home">
