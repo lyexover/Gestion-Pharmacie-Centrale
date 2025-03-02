@@ -1,0 +1,188 @@
+.traitement-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-gray);
+}
+
+.traitement-container .left {
+  flex: 2;
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.traitement-container .right {
+  flex: 1;
+  background-color: var(--color-white);
+  border-left: 1px solid #ddd;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+}
+
+.traitement-container h1 {
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+}
+
+/* Styles pour le détail de la commande */
+.details-traitement {
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-traitement .head {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.details-traitement h2 {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.details-traitement .head p {
+  color: #555;
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+}
+
+.details-traitement .head p:last-child {
+  font-weight: var(--font-medium);
+}
+
+/* Styles pour la liste des articles */
+.Articles-Commandes {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.Articles-Commandes h2 {
+  margin: 0.5rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.articles {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.article {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article .icone {
+  width: 45px;
+  height: 45px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: var(--color-white);
+  font-size: 1.2rem;
+}
+
+.article .content {
+  flex: 1;
+}
+
+.article .content p:first-child {
+  color: var(--color-secondary);
+  font-weight: var(--font-medium);
+  font-size: 0.85rem;
+}
+
+.article .content p:nth-child(2) {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  margin: 0.3rem 0;
+}
+
+.article .content p:last-child {
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: var(--font-regular);
+}
+
+/* Pour afficher un statut différent selon l'état de la commande */
+.details-traitement .head p:last-child {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: var(--font-medium);
+  font-size: 0.85rem;
+}
+
+.details-traitement .head p:last-child:contains("En attente") {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.details-traitement .head p:last-child:contains("Confirmée") {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.details-traitement .head p:last-child:contains("Annulée") {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Style pour la partie gauche à compléter */
+.left .form-section {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.left .form-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-weight: var(--font-semibold);
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .traitement-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .traitement-container .left,
+  .traitement-container .right {
+    flex: none;
+    width: 100%;
+  }
+
+  .traitement-container .right {
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+}

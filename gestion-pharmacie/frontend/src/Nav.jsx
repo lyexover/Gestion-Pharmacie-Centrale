@@ -36,7 +36,12 @@ const fonctionalites = {
             path : 'gestion-stock' , 
             label : 'Gestion Stock' , 
             icon : <i className="fa-solid fa-warehouse"></i>
-        }
+        } , 
+        {
+            path : 'commandes-super' , 
+            label : 'Mes Commandes' , 
+            icon : <i class="fa-solid fa-truck-fast"></i>
+        } ,
     ] , 
     admin_base : [
         {

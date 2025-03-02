@@ -18,6 +18,7 @@ import DetailsCommande from './DetailsCommande'
 import ConfirmDelete from "./ConfirmDelete"
 import Commandes_super from './Commandes_super'
 import { AlertProvider } from './AlertContext'
+import TraiterCommande from './TraiterCommande'
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
           } , 
 
           {
-            path : 'gestionnaire_stock' , 
+            path : 'gestionnaire_stock', 
             element : <RequireRole allowedRoles={['gestionnaire_stock']}/> ,
             children : [
               {
@@ -99,9 +100,25 @@ const router = createBrowserRouter([
                   {
                     path : 'confirmer-suppression' ,
                     element : <ConfirmDelete/>
+                  } 
+                  
+                ] 
+              } , 
+              {
+                path : 'commandes-super' , 
+                element : <Commandes_super/> , 
+                children : [
+                  {
+                    path : 'details' , 
+                    element : <DetailsCommande/>
                   }
                 ]
-              } 
+              } , 
+              {
+                path : 'traiter-commande' , 
+                element : <TraiterCommande/>
+              }
+                
             ]
           } , 
 
@@ -120,7 +137,7 @@ const router = createBrowserRouter([
                 ]
               }
             ]
-          }
+          } 
           
         ]
       }

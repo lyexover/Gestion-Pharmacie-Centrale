@@ -2,11 +2,13 @@ import { useMemo } from 'react'
 import './css/commande.css'
 import { useRouteLoaderData, Link, Outlet } from 'react-router-dom'
 import { useState } from 'react'
+import { useAuth } from './AuthContext'
 
 export default function Commandes_super(){
 
 const {commandes} = useRouteLoaderData('parent')
 const [selectedFilter, setSelectedFilter] = useState('')
+const {user} = useAuth();
 
 
 const filteredCommandes = useMemo(() => {
@@ -53,7 +55,10 @@ const filteredCommandes = useMemo(() => {
                                     {commande.statut}
                                 </td>
                                 <td>{commande.delai} jours</td>
-                                <td><Link to={'details'} className="details-btn" state={{commande}}>Details</Link></td>
+                                <td>
+                                  <Link to={'details'} className="details-btn" state={{commande}}>Details</Link>
+                                  {user.role==='gestionnaire_stock' && <Link to={'../traiter-commande'} className="traiter-btn" state={{commande}}>Traiter</Link>}
+                                </td>
                             </tr>
                         ))
                        }
