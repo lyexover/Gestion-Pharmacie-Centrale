@@ -186,3 +186,81 @@
     border-top: 1px solid #ddd;
   }
 }
+
+/* Styles pour lots-commande */
+.lots-commande {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.lots {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lot {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lot .content {
+  flex: 1;
+}
+
+.lot .content p:first-child {
+  color: var(--color-secondary);
+  font-weight: var(--font-medium);
+  font-size: 0.85rem;
+}
+
+.lot .content p:nth-child(2) {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  margin: 0.3rem 0;
+}
+
+.lot .content p:last-child {
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: var(--font-regular);
+}
+
+/* Option: Si vous voulez ajouter une icône comme pour les articles */
+.lot::before {
+  content: "";
+  width: 45px;
+  height: 45px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  /* Vous pouvez ajouter une icône ici si vous le souhaitez */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .lots {
+    gap: 0.8rem;
+  }
+
+  .lot {
+    padding: 0.8rem;
+  }
+}

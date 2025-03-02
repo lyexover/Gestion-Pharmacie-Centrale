@@ -1,10 +1,10 @@
 import { useRouteLoaderData } from "react-router-dom"
 
-export default function Details_traitement({commande}){
+export default function Details_traitement({commande, produits}){
 
-    const {commandeProduits} = useRouteLoaderData('parent')
-    const produits = commandeProduits.filter(produit => produit.id_commande === commande.id_commande)
-
+    
+   
+  
 
     return(
         <div className='details-traitement'>
