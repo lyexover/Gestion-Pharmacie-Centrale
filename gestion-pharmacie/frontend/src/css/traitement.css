@@ -224,7 +224,7 @@
 .lot .content p:first-child {
   color: var(--color-secondary);
   font-weight: var(--font-medium);
-  font-size: 0.85rem;
+  font-size: 1.1rem;
 }
 
 .lot .content p:nth-child(2) {
@@ -242,8 +242,8 @@
 /* Option: Si vous voulez ajouter une icône comme pour les articles */
 .lot::before {
   content: "";
-  width: 45px;
-  height: 45px;
+  width: 4.5rem;
+  height: 4.5rem;
   background-color: var(--color-secondary);
   border-radius: 50%;
   display: flex;
@@ -263,4 +263,26 @@
   .lot {
     padding: 0.8rem;
   }
+}
+
+.qauntite-btns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.qauntite-btns button {
+  padding: 0.3rem;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.qauntite-btns button:hover {
+  background-color: #00b3ff7e;
 }
