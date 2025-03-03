@@ -29,7 +29,6 @@ export default function TraiterCommande() {
     // Initialisation automatique des lots et quantités
     useEffect(() => {
         const selections = {};
-        const traitementInitial = [];
         
         // Traiter chaque produit commandé
         produits.forEach(produit => {
@@ -46,14 +45,6 @@ export default function TraiterCommande() {
                         // Enregistrer la sélection
                         selections[lot.id_lot] = quantitePrelevee;
                         
-                        // Ajouter aux données de traitement
-                        traitementInitial.push({
-                            id_lot: lot.id_lot,
-                            code_produit: lot.code_produit,
-                            quantite: quantitePrelevee,
-                            nom: lot.nom
-                        });
-                        
                         // Réduire la quantité restante à traiter
                         resteATraiter -= quantitePrelevee;
                     }
@@ -64,6 +55,7 @@ export default function TraiterCommande() {
         setLotSelections(selections);
         console.log("Initialisation automatique:", selections);
     }, [produits, produits_lots]);
+
     
     // Construire les données de traitement à partir des sélections de lots
     const traitement_data = useMemo(() => {
@@ -79,8 +71,6 @@ export default function TraiterCommande() {
         }).filter(Boolean); // Filtre les entrées nulles
     }, [lotSelections, produits_lots]);
     
-
-
 
     
     // Fonction pour augmenter la quantité d'un lot
