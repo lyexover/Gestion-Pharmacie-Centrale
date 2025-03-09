@@ -1,15 +1,69 @@
-import { useLocation, useRouteLoaderData } from "react-router-dom";
+import { useLocation, useRouteLoaderData, useNavigate } from "react-router-dom";
 import Details_traitement from "./Details-traitement";
 import './css/traitement.css';
 import { useEffect, useMemo, useState } from "react";
+import { generateCommandePdf } from "./GenerateCommandePdf";
 
 export default function TraiterCommande() {
     const { commande } = useLocation().state;
     const { commandeProduits, lots } = useRouteLoaderData('parent');
+    const navigate = useNavigate();
+
     const produits = useMemo(() => 
         commandeProduits.filter(produit => produit.id_commande === commande.id_commande),
         [commandeProduits, commande.id_commande]
     );
+
+    console.log(commande, produits)
+
+
+    // Ajoutez cette fonction dans votre composant
+const traiterCommande = async () => {
+    try {
+        // Préparer les données à envoyer au backend
+        const lotsAModifier = Object.entries(lotSelections).map(([id_lot, quantite]) => ({
+            id_lot: parseInt(id_lot),
+            quantite: quantite
+        }));
+        
+        // Vérifier s'il y a des lots à traiter
+        if (lotsAModifier.length === 0) {
+            alert("Aucun lot sélectionné pour le traitement.");
+            return;
+        }
+        
+        // Envoyer les données au backend
+        const response = await fetch('http://localhost:3000/api/traiter-commande', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_commande: commande.id_commande,
+                lots: lotsAModifier
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Erreur: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
+        // Traiter la réponse
+        if (result.success) {
+            generateCommandePdf(commande, produits, traitement_data, produits_lots);
+
+            alert("Commande traitée avec succès!");
+            navigate(-1);
+        } else {
+            alert(`Erreur lors du traitement: ${result.message}`);
+        }
+    } catch (error) {
+        console.error("Erreur lors du traitement de la commande:", error);
+        alert("Une erreur est survenue lors du traitement de la commande.");
+    }
+};
 
     const produits_id = useMemo(() => 
         produits.map(produit => produit.code_produit), 
@@ -56,6 +110,7 @@ export default function TraiterCommande() {
         console.log("Initialisation automatique:", selections);
     }, [produits, produits_lots]);
 
+    console.log(lotSelections);
     
     // Construire les données de traitement à partir des sélections de lots
     const traitement_data = useMemo(() => {
@@ -104,7 +159,16 @@ export default function TraiterCommande() {
     return (
         <div className="traitement-container">
             <div className="left">
-                <h1>Traiter commande</h1>
+                <div className="head">
+                  <h1>Traiter commande</h1>
+                      <button 
+                          className="valider-btn" 
+                         onClick={traiterCommande}
+                          disabled={traitement_data.length === 0}
+                      >
+                          Valider le traitement
+                      </button>
+                </div>
                 <div className="lots-commande">
                     <div className="lots">
                         {produits_lots.map((lot, index) => (
@@ -147,4 +211,16 @@ export default function TraiterCommande() {
             </div>
         </div>
     );
+
+
+
+
+
+
 }
+
+
+
+
+
+

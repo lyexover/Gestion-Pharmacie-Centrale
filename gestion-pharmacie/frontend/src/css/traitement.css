@@ -19,13 +19,16 @@
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
   overflow-y: auto;
 }
+.traitement-container .head {
+  padding: 0.5rem 0;
+}
 
 .traitement-container h1 {
   color: var(--color-primary);
   font-weight: var(--font-bold);
-  margin-bottom: 1.5rem;
+
   text-transform: capitalize;
-  border-bottom: 2px solid var(--color-secondary);
+
   padding-bottom: 0.5rem;
 }
 
@@ -192,8 +195,9 @@
   background-color: var(--color-white);
   border-radius: 8px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
 }
 
 .lots {
@@ -205,11 +209,13 @@
 .lot {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: 1.2rem;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid var(--color-secondary);
 }
 
 .lot:hover {
@@ -225,6 +231,7 @@
   color: var(--color-secondary);
   font-weight: var(--font-medium);
   font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .lot .content p:nth-child(2) {
@@ -237,52 +244,117 @@
   color: #555;
   font-size: 0.9rem;
   font-weight: var(--font-regular);
+  margin-top: 0.5rem;
 }
 
-/* Option: Si vous voulez ajouter une icône comme pour les articles */
-.lot::before {
-  content: "";
-  width: 4.5rem;
-  height: 4.5rem;
+.qauntite-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.qauntite-btns button {
+  padding: 0;
   background-color: var(--color-secondary);
+  color: var(--color-white);
+  outline: none;
+  border: none;
   border-radius: 50%;
+  height: 2.2rem;
+  width: 2.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+  font-weight: var(--font-bold);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1rem;
-  flex-shrink: 0;
-  /* Vous pouvez ajouter une icône ici si vous le souhaitez */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive design */
+.qauntite-btns button:hover {
+  background-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.qauntite-btns button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.qauntite-btns p {
+  font-weight: var(--font-semibold);
+  font-size: 1.1rem;
+  width: 2rem;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+/* Ajout de styles pour l'en-tête et le bouton de validation */
+.left .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+.valider-btn {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.valider-btn:hover {
+  background-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.valider-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive design pour les lots */
 @media (max-width: 768px) {
   .lots {
     gap: 0.8rem;
   }
 
   .lot {
-    padding: 0.8rem;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
-}
 
-.qauntite-btns {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.qauntite-btns button {
-  padding: 0.3rem;
-  background-color: var(--color-secondary);
-  color: var(--color-white);
-  outline: none;
-  border: none;
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+  .qauntite-btns {
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
 
-.qauntite-btns button:hover {
-  background-color: #00b3ff7e;
+  .left .head {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .valider-btn {
+    width: 100%;
+  }
 }

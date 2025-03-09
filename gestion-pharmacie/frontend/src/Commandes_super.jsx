@@ -57,7 +57,11 @@ const filteredCommandes = useMemo(() => {
                                 <td>{commande.delai} jours</td>
                                 <td>
                                   <Link to={'details'} className="details-btn" state={{commande}}>Details</Link>
-                                  {user.role==='gestionnaire_stock' && <Link to={'../traiter-commande'} className="traiter-btn" state={{commande}}>Traiter</Link>}
+                                  {user.role === 'gestionnaire_stock' && (
+                                     commande.statut === 'en attente' 
+                                        ?<Link to={'../traiter-commande'} className="traiter-btn" state={{commande}}>Traiter</Link>
+                                       : <span className="traiter-btn disabled">Traiter</span>
+                                   )}
                                 </td>
                             </tr>
                         ))

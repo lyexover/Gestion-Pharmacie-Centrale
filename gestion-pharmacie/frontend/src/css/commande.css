@@ -597,3 +597,8 @@
   color: rgb(23, 90, 23);
   font-weight: 550;
 }
+
+.mes-commandes .disabled {
+  cursor: not-allowed;
+  background-color: rgb(156, 156, 156);
+}

@@ -67,4 +67,46 @@ router.get('/commandeProduits', verifyRole(['superAdmin', 'gestionnaire_stock', 
     }
 });
 
+
+
+// Dans votre fichier de routes backend
+router.post('/traiter-commande', async (req, res) => {
+    try {
+        const { id_commande, lots } = req.body;
+        
+        // Commencer une transaction pour assurer l'intégrité des données
+        connection = await db.getConnection();
+        await connection.beginTransaction();
+        
+        // Mettre à jour chaque lot
+       const updatePromises = lots.map(lot => {
+            return connection.query(
+                'UPDATE lots SET quantite_disponible = quantite_disponible - ? WHERE id_lot = ?',
+                [lot.quantite, lot.id_lot]
+            );
+        })
+        
+        await Promise.all(updatePromises);
+
+        // Mettre à jour le statut de la commande si nécessaire
+        await db.query(
+            'UPDATE commandes SET statut = ? WHERE id_commande = ?',
+            ['en cours de traitement', id_commande]
+        );
+        
+        
+        // Valider la transaction
+        await connection.commit();
+        
+        res.json({ success: true, message: "Commande traitée avec succès" });
+    } catch (error) {
+        // Annuler la transaction en cas d'erreur
+        await connection.rollback();
+        console.error("Erreur lors du traitement de la commande:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+
+
 module.exports = router;
