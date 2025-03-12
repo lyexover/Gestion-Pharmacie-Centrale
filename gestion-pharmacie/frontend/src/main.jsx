@@ -19,7 +19,7 @@ import ConfirmDelete from "./ConfirmDelete"
 import Commandes_super from './Commandes_super'
 import { AlertProvider } from './AlertContext'
 import TraiterCommande from './TraiterCommande'
-
+import Dashboard_super from './Dashboard-super'
 const router = createBrowserRouter([
   {
     path: '/login',
@@ -75,6 +75,10 @@ const router = createBrowserRouter([
                     element : <DetailsCommande/>
                   }
                 ]
+              } , 
+              {
+                path : 'Dashboard' , 
+                element : <Dashboard_super/>
               }
             ]
           } , 
