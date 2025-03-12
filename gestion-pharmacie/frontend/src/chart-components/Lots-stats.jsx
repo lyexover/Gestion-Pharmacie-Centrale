@@ -4,9 +4,6 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 export default function Lots_stats() {
   const { lots } = useRouteLoaderData('parent');
 
-  // Make sure we have data
-  console.log("Lots data:", lots);
-
   const chartData = lots.reduce((acc, lot) => {
     if (new Date(lot.date_peremption) < Date.now()) {
       acc[0].value += 1;
@@ -19,27 +16,13 @@ export default function Lots_stats() {
     { name: "available", value: 0 }
   ]);
 
-  // Log the chart data to check if it's being processed correctly
-  console.log("Chart data:", chartData);
-
-  const COLORS = ['#FF6B6B', '#4ECB71']; // Red for expired, Green for available
-  
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
-  // Only render the chart if we have data with non-zero values
+  const COLORS = ['#FF6B6B', '#4ECB71'];
   const hasData = chartData.some(item => item.value > 0);
 
+  const renderCustomizedLabel = ({ name, percent }) => {
+    return `${name} ${(percent * 100).toFixed(0)}%`;
+  };
+  
 
   return (
     <div className="nbr-produits">
@@ -70,14 +53,14 @@ export default function Lots_stats() {
           </div>
         )}
       </div>
-      <div className="flex justify-center mt-4">
-        <div className="flex items-center mr-4">
-          <div className="w-4 h-4 bg-red-500 mr-2"></div>
-          <span>Expired: {chartData[0].value}</span>
+      <div className="legend">
+        <div className="legend-item">
+          <div className="legend-color" style={{ backgroundColor: COLORS[0] }}></div>
+          <span className="legend-text">Expired: {chartData[0].value}</span>
         </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-green-500 mr-2"></div>
-          <span>Available: {chartData[1].value}</span>
+        <div className="legend-item">
+          <div className="legend-color" style={{ backgroundColor: COLORS[1] }}></div>
+          <span className="legend-text">Available: {chartData[1].value}</span>
         </div>
       </div>
     </div>

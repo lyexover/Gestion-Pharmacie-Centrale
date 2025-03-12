@@ -1,11 +1,147 @@
 @import url("colors.css");
 
-.dashboard-container {
-  width: 100%;
-  height: 100%;
+/* Variables pour des couleurs et espacement cohérents */
+:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3f37c9;
+  --success-color: #4ecb71;
+  --danger-color: #ff6b6b;
+  --light-bg: #f8f9fa;
+  --dark-bg: #212529;
+  --border-color: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --card-padding: 1.5rem;
+}
+
+/* Styles pour le conteneur de la page */
+.dashboard-page {
+  padding: 1rem;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+}
+
+/* Styles pour l'en-tête du dashboard */
+.dashboard-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Styles pour les cartes de statistiques */
+.stats-cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background-color: white;
+  padding: var(--card-padding);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h5 {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Styles pour le composant Lots_stats */
+.nbr-produits {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--card-padding);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.nbr-produits:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .chart-container {
-  width: 100%;
-  height: auto;
+  width: 250px;
+  height: 250px;
+  margin: 1rem 0;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.legend-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Styles additionnels pour le pie chart */
+text {
+  font-size: 0.8rem;
+  fill: var(--text-primary);
+}
+
+/* Styles pour le message "No data available" */
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-size: 1rem;
 }
