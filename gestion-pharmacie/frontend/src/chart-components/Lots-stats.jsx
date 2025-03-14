@@ -16,7 +16,7 @@ export default function Lots_stats() {
     { name: "available", value: 0 }
   ]);
 
-  const COLORS = ['#FF6B6B', '#4ECB71'];
+  const COLORS = ['#00296b', '#00b2ff'];
   const hasData = chartData.some(item => item.value > 0);
 
   const renderCustomizedLabel = ({ name, percent }) => {

@@ -5,33 +5,39 @@
   --primary-color: #4361ee;
   --secondary-color: #3f37c9;
   --success-color: #4ecb71;
+  --warning-color: #ffba08;
   --danger-color: #ff6b6b;
+  --info-color: #3abff8;
   --light-bg: #f8f9fa;
   --dark-bg: #212529;
   --border-color: #e9ecef;
   --text-primary: #212529;
   --text-secondary: #6c757d;
-  --border-radius: 8px;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --card-padding: 1.5rem;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --card-padding: 1rem;
+  --transition: all 0.3s ease;
 }
 
 /* Styles pour le conteneur de la page */
 .dashboard-page {
-  padding: 1rem;
+  padding: 1.5rem;
   background-color: var(--light-bg);
   min-height: 100vh;
 }
 
 /* Styles pour l'en-tête du dashboard */
 .dashboard-header {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .dashboard-header h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
@@ -40,45 +46,221 @@
 .dashboard-subtitle {
   color: var(--text-secondary);
   font-size: 1rem;
+  margin: 0;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-refresh {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-refresh:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Layout structure */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-top-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.stats-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.dashboard-charts-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.chart-wrapper {
+  flex: 1;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--card-padding);
+  transition: var(--transition);
+}
+
+.chart-wrapper:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* Styles pour les cartes de statistiques */
-.stats-cards {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
 .card {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background-color: white;
   padding: var(--card-padding);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--transition);
   border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--primary-color);
 }
 
 .card h5 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
 .card p {
   font-size: 2rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
+}
+
+/* Styles pour le composant LastCommandes */
+.last-commandes-card {
+  flex: 2;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  overflow: hidden;
+  padding: var(--card-padding);
+}
+
+.last-commandes-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.view-all {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.view-all:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.commandes-list {
+  padding: 0.5rem 0;
+}
+
+.commande-item {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.commande-item:last-child {
+  border-bottom: none;
+}
+
+.commande-item:hover {
+  background-color: rgba(67, 97, 238, 0.05);
+}
+
+.commande-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.commande-region {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.commande-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.status-delivered {
+  background-color: rgba(78, 203, 113, 0.15);
+  color: var(--success-color);
+}
+
+.status-processing {
+  background-color: rgba(67, 97, 238, 0.15);
+  color: var(--primary-color);
+}
+
+.status-pending {
+  background-color: rgba(255, 186, 8, 0.15);
+  color: var(--warning-color);
+}
+
+.status-default {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: var(--text-secondary);
+}
+
+.commande-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 /* Styles pour le composant Lots_stats */
@@ -91,17 +273,17 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   padding: var(--card-padding);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--transition);
   border: 1px solid var(--border-color);
 }
 
 .nbr-produits:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .chart-container {
-  width: 250px;
+  width: 100%;
   height: 250px;
   margin: 1rem 0;
 }
@@ -109,6 +291,7 @@
 .legend {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-top: 1rem;
 }
@@ -130,18 +313,40 @@
   color: var(--text-secondary);
 }
 
-/* Styles additionnels pour le pie chart */
-text {
-  font-size: 0.8rem;
-  fill: var(--text-primary);
-}
-
 /* Styles pour le message "No data available" */
 .no-data {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 200px;
   color: var(--text-secondary);
   font-size: 1rem;
+  font-style: italic;
+}
+
+.commandes-chart {
+  flex: 2;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .dashboard-top-row,
+  .dashboard-charts-row {
+    flex-direction: column;
+  }
+
+  .stats-summary {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stats-summary {
+    flex-direction: column;
+  }
 }
