@@ -1,19 +1,22 @@
 import { useAuth } from "./AuthContext";
 import { useAlert } from "./AlertContext"; // Ajout de l'import
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 
 export default function Nav() {
+
 const {user, logout} = useAuth();     
-const [clicked, setClicked] = useState('');
 const { stockAlert, perimeAlert } = useAlert(); // Récupération des états d'alerte
+const pathname = useLocation().pathname.split('/')[2] ; 
+
+
 
 const fonctionalites = {
     superAdmin : [
         {
-            path : 'gestion-utilisateurs' , 
-            label : 'Gestion Utilisateurs' , 
-            icon : <i class="fa-solid fa-users"></i>
+            path : '' , 
+            label : 'Dashboard' , 
+            icon : <i class="fa-solid fa-chart-pie"></i>
         } , 
         {
             path : 'gestion-stock' , 
@@ -24,14 +27,21 @@ const fonctionalites = {
             path : 'commandes-super' , 
             label : 'Mes Commandes' , 
             icon : <i class="fa-solid fa-truck-fast"></i>
-        } , 
+        } 
+        ,
         {
-            path : 'Dashboard' , 
-            label : 'Dashboard' , 
-            icon : <i class="fa-solid fa-chart-pie"></i>
+            path : 'gestion-utilisateurs' , 
+            label : 'Gestion Utilisateurs' , 
+            icon : <i class="fa-solid fa-users"></i>
         }
+        
     ] , 
     gestionnaire_stock : [
+        {
+            path : '' , 
+            label : 'Dashboard' , 
+            icon : <i class="fa-solid fa-chart-pie"></i>
+        } ,
         {
             path : 'gestion-stock' , 
             label : 'Gestion Stock' , 
@@ -64,7 +74,7 @@ return (
                 fonctionalites[user.role].map((fonctionalite, index) => (
                     <li key={index}>
                         <Link onClick={()=>setClicked(fonctionalite.label)}
-                         className={`link ${clicked === fonctionalite.label ? 'active' : ''}`}
+                         className={`link ${pathname === fonctionalite.path ? 'active' : ''}`}
                           to={`/${user.role}/${fonctionalite.path}`}> 
                             <span className="icon">{fonctionalite.icon}</span> 
                             { fonctionalite.label}

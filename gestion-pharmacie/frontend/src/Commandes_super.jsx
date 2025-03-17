@@ -60,7 +60,7 @@ const filteredCommandes = useMemo(() => {
                                   {user.role === 'gestionnaire_stock' && (
                                      commande.statut === 'en attente' 
                                         ?<Link to={'../traiter-commande'} className="traiter-btn" state={{commande}}>Traiter</Link>
-                                       : <span className="traiter-btn disabled">Traiter</span>
+                                       : <Link to={'valideLivre'} state={{id : commande.id_commande}} className={`livre-btn ${commande.statut === 'livrée' ? 'disabled' : ''}`}>Livré</Link>
                                    )}
                                 </td>
                             </tr>

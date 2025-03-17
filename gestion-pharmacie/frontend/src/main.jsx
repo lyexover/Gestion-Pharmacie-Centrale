@@ -20,6 +20,10 @@ import Commandes_super from './Commandes_super'
 import { AlertProvider } from './AlertContext'
 import TraiterCommande from './TraiterCommande'
 import Dashboard_super from './Dashboard-super'
+import ValideLivre from './ValideLivre'
+
+
+
 const router = createBrowserRouter([
   {
     path: '/login',
@@ -77,7 +81,7 @@ const router = createBrowserRouter([
                 ]
               } , 
               {
-                path : 'Dashboard' , 
+                index: true , 
                 element : <Dashboard_super/>
               }
             ]
@@ -115,12 +119,20 @@ const router = createBrowserRouter([
                   {
                     path : 'details' , 
                     element : <DetailsCommande/>
+                  } , 
+                  {
+                    path : 'valideLivre' , 
+                    element : <ValideLivre/>
                   }
                 ]
               } , 
               {
                 path : 'traiter-commande' , 
                 element : <TraiterCommande/>
+              },
+              {
+                index: true , 
+                element : <Dashboard_super/>
               }
                 
             ]

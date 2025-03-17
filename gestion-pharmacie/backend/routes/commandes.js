@@ -108,5 +108,22 @@ router.post('/traiter-commande', async (req, res) => {
 });
 
 
+router.patch('/modifierStatut', async(req, res)=> {
+    const {id} = req.body
+
+    try{
+        const query = `UPDATE commandes SET statut = 'livrée' WHERE id_commande = ?`
+        await db.query(query, [id])
+
+        return res.json({message : 'statut modifie avec succes'})
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({message : 'db error'})
+    }
+   
+
+})
+
 
 module.exports = router;

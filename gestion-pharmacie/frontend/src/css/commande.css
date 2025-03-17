@@ -128,6 +128,22 @@
   opacity: 0.9;
 }
 
+.livre-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(25, 182, 25);
+  text-decoration: none;
+  color: var(--color-white);
+  cursor: pointer;
+  font-weight: var(--font-medium);
+  transition: opacity 0.3s ease;
+}
+
+.mes-commandes .livre-btn:hover {
+  opacity: 0.7;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .commandes-header {
@@ -601,4 +617,39 @@
 .mes-commandes .disabled {
   cursor: not-allowed;
   background-color: rgb(156, 156, 156);
+}
+
+/* valider livraison */
+
+.valide-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2.7rem;
+  text-align: center;
+}
+
+.livre-buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.livre-buttons button {
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  flex: 1;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.livre-buttons button:first-child {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.livre-buttons button:hover {
+  opacity: 0.6;
 }
