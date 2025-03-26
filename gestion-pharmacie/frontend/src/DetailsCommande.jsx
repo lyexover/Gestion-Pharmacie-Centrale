@@ -7,6 +7,7 @@ export default function DetailsCommande() {
     const navigate = useNavigate();
   
 
+
     // Filtrer les produits de la commande
     const produitsCommande = commandeProduits.filter(
         produit => produit.id_commande === commande.id_commande
@@ -25,11 +26,13 @@ export default function DetailsCommande() {
                 <div className="commande-header">
                     <h2>Détails de la Commande</h2>
                     <div className="commande-info">
-                        <p>Commande N° : <span>{commande.id_commande}</span></p>
+                        <p>Commande N° : <span>{`${commande.id_commande}/${new Date(commande.date_commande).getFullYear()} `}</span></p>
                         <p>Date : <span>{new Date(commande.date_commande).toLocaleDateString()}</span></p>
+                        <p>Region : <span>{commande.nom_region}</span></p>
                         <p>Statut : <span className={`status ${commande.statut.toLowerCase()}`}>
                             {commande.statut}
                         </span></p>
+                       
                     </div>
                 </div>
 

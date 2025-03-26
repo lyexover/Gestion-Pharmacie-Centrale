@@ -126,4 +126,24 @@ router.patch('/modifierStatut', async(req, res)=> {
 })
 
 
+router.patch('/ajouter-note/:id_commande', async(req, res)=> {
+    const {note} = req.body
+    const id = req.params.id_commande
+
+    try{
+        const query = 'UPDATE commandes SET notes = ? WHERE id_commande = ?'
+        await db.query(query, [note, id])
+
+        return res.json({message: 'note ajoutee avec succes'})
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({message : 'db error'})
+    }
+   
+
+
+})
+
+
 module.exports = router;

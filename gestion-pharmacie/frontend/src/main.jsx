@@ -21,6 +21,8 @@ import { AlertProvider } from './AlertContext'
 import TraiterCommande from './TraiterCommande'
 import Dashboard_super from './Dashboard-super'
 import ValideLivre from './ValideLivre'
+import NoteForm from './NoteForm'
+import Note from './Note'
 
 
 
@@ -128,7 +130,13 @@ const router = createBrowserRouter([
               } , 
               {
                 path : 'traiter-commande' , 
-                element : <TraiterCommande/>
+                element : <TraiterCommande/> , 
+                children : [
+                  {
+                    path : 'ajouter-note', 
+                    element : <NoteForm/>
+                  }
+                ]
               },
               {
                 index: true , 
@@ -149,6 +157,10 @@ const router = createBrowserRouter([
                   {
                     path : 'details' , 
                     element : <DetailsCommande/>
+                  } , 
+                  {
+                    path : 'notes', 
+                    element : <Note/>
                   }
                 ]
               }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import './css/commande.css'
-import { useRouteLoaderData, Link, Outlet } from 'react-router-dom'
-import { useState } from 'react'
+import { useRouteLoaderData, Link, Outlet, useRevalidator, useNavigation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useAuth } from './AuthContext'
 
 export default function Commandes_super(){
@@ -9,7 +9,15 @@ export default function Commandes_super(){
 const {commandes} = useRouteLoaderData('parent')
 const [selectedFilter, setSelectedFilter] = useState('')
 const {user} = useAuth();
+const revalidator = useRevalidator()
+const navigation = useNavigation()
 
+
+useEffect(() => {
+    if (navigation.state === 'idle') {
+        revalidator.revalidate();
+    }
+}, [navigation.state]);
 
 const filteredCommandes = useMemo(() => {
     return selectedFilter === ''

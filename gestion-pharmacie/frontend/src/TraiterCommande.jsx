@@ -1,13 +1,16 @@
-import { useLocation, useRouteLoaderData, useNavigate } from "react-router-dom";
+import { useLocation, useRouteLoaderData, useNavigate, Outlet } from "react-router-dom";
 import Details_traitement from "./Details-traitement";
 import './css/traitement.css';
 import { useEffect, useMemo, useState } from "react";
 import { generateCommandePdf } from "./GenerateCommandePdf";
+import { Link } from "react-router-dom";
 
 export default function TraiterCommande() {
     const { commande } = useLocation().state;
     const { commandeProduits, lots } = useRouteLoaderData('parent');
     const navigate = useNavigate();
+
+    console.log(commande)
 
     const produits = useMemo(() => 
         commandeProduits.filter(produit => produit.id_commande === commande.id_commande),
@@ -55,7 +58,7 @@ const traiterCommande = async () => {
             generateCommandePdf(commande, produits, traitement_data, produits_lots);
 
             alert("Commande traitée avec succès!");
-            navigate(-1);
+            navigate('/gestionnaire_stock/commandes-super');
         } else {
             alert(`Erreur lors du traitement: ${result.message}`);
         }
@@ -161,6 +164,17 @@ const traiterCommande = async () => {
             <div className="left">
                 <div className="head">
                   <h1>Traiter commande</h1>
+
+                <div className="traitement-actions-container" >
+                  <Link  
+                      className={`note-btn ${commande.notes ? 'disabledNotes' : ''}`} 
+                      state={{commande : commande}} 
+                      to={'ajouter-note'}
+                      {...(commande.notes ? { 'aria-disabled': 'true' } : {})}
+                  >
+                      + Note
+                  </Link>
+
                       <button 
                           className="valider-btn" 
                          onClick={traiterCommande}
@@ -168,6 +182,8 @@ const traiterCommande = async () => {
                       >
                           Valider le traitement
                       </button>
+                </div>
+  
                 </div>
                 <div className="lots-commande">
                     <div className="lots">
@@ -209,6 +225,8 @@ const traiterCommande = async () => {
                     traitement_data={traitement_data}
                 />
             </div>
+
+            <Outlet/>
         </div>
     );
 

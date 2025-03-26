@@ -46,7 +46,7 @@ export default function MesCommandes(){
                             {
                                 commandes.length === 0 ? (
                                     <tr>
-                                        <td>Aucune Commande a afficher</td>
+                                        <td colSpan="5">Aucune Commande a afficher</td>
                                     </tr>
                                 ) : 
                                 (
@@ -56,13 +56,21 @@ export default function MesCommandes(){
                                              <td>{commande.id_admin_base}</td>
                                              <td>{commande.date_commande.split('T')[0]}</td>
                                              <td>{commande.statut}</td>
-                                             <td><Link to={'details'} className="details-btn" state={{commande}}>Details</Link></td>
+                                             <td className="action-buttons">
+                                                <Link to={'details'} className="details-btn" state={{commande}}>Details</Link>
+                                                {commande.notes && (
+                                                    <Link 
+                                                        to={'notes'} 
+                                                        className="notes-btn"
+                                                        state={{commande}}
+                                                    >
+                                                        Notes
+                                                    </Link>
+                                                )}
+                                             </td>
                                         </tr>
-
-
                                     ))
                                 )
-
                             }
                            </tbody>
                        </table>
@@ -76,9 +84,7 @@ export default function MesCommandes(){
                 )
             }
 
-
-               <Outlet/>
-            
+            <Outlet/>
         </div>
     )
 }

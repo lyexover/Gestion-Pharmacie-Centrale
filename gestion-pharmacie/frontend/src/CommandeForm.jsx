@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './css/commande.css';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function CommandeForm({ produits }) {
     const [step, setStep] = useState(1);
@@ -8,6 +9,7 @@ export default function CommandeForm({ produits }) {
     const [delai, setDelai] = useState('');
     const [searchData, setSearchData] = useState('')
     const [filteredProducts, setFilteredProducts] = useState(produits)
+    const navigate = useNavigate()
     const {user} = useAuth()
 
     useEffect(()=> {
@@ -76,7 +78,8 @@ export default function CommandeForm({ produits }) {
                 throw new Error(data.message)
             }
 
-            console.log(data.message)
+            window.alert(data.message)
+            navigate('/admin_base/mes-commandes')
         }
         catch(err){
             console.error(err)
