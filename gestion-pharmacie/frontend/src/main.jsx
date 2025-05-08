@@ -23,7 +23,7 @@ import Dashboard_super from './Dashboard-super'
 import ValideLivre from './ValideLivre'
 import NoteForm from './NoteForm'
 import Note from './Note'
-
+import AdminDashboard from './AdminDashboard'
 
 
 const router = createBrowserRouter([
@@ -163,6 +163,10 @@ const router = createBrowserRouter([
                     element : <Note/>
                   }
                 ]
+              } , 
+              {
+                index: true ,
+                element : <AdminDashboard/>
               }
             ]
           } 

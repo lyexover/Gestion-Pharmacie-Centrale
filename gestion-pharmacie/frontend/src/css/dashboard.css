@@ -350,3 +350,156 @@
     flex-direction: column;
   }
 }
+
+/* Styles for the CommandesPerMonth and CommandesStatus components */
+
+/* Chart card styling - common for both components */
+.chart-card {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* CommandesPerMonth specific styles */
+.bar-chart-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+/* CommandesStatus specific styles */
+.pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Status badges for the table in AdminDashboard */
+.status-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.status-badge.en-attente {
+  background-color: rgba(255, 186, 8, 0.15);
+  color: var(--warning-color);
+}
+
+.status-badge.en-cours-de-traitement {
+  background-color: rgba(67, 97, 238, 0.15);
+  color: var(--primary-color);
+}
+
+.status-badge.livrée {
+  background-color: rgba(78, 203, 113, 0.15);
+  color: var(--success-color);
+}
+
+/* Recent commandes table styling */
+.commandes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.commandes-table th,
+.commandes-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.commandes-table th {
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.commandes-table tr:hover {
+  background-color: rgba(67, 97, 238, 0.05);
+}
+
+/* Stats info for the summary card */
+.stats-card {
+  flex: 1;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--card-padding);
+  transition: var(--transition);
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.stats-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Mobile responsiveness adjustments */
+@media (max-width: 640px) {
+  .stat-item {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .commandes-table {
+    font-size: 0.85rem;
+  }
+
+  .commandes-table th,
+  .commandes-table td {
+    padding: 0.5rem;
+  }
+}

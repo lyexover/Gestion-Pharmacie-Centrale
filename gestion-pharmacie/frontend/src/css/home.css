@@ -1,90 +1,249 @@
 @import url("colors.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 .home {
   display: flex;
-  height: 100vh; /* Set full viewport height */
-  overflow: hidden; /* Prevent outer scrolling */
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
   width: 19%;
-  background-color: var(--color-primary);
+  min-width: 240px;
+  background: linear-gradient(135deg, var(--color-primary), #026391);
   height: 100vh;
   position: sticky;
   top: 0;
   overflow: hidden;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav .nav-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.8rem 1rem;
+  padding: 1.8rem 1.5rem;
   gap: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav .nav-logo img {
-  width: 83px;
-  height: 83px;
+  width: 70px;
+  height: 70px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .nav .nav-logo h2 {
   color: white;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem;
 }
 
-.logout-btn {
-  margin-top: auto;
-  padding: 0.5rem 0;
-  background-color: #0483b9;
-  color: white;
-  font-weight: 550;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.logout-btn:hover {
-  background-color: #08a0e1;
-}
-
+/* Navigation menu styling */
 .nav ul {
   position: relative;
-  top: 3rem;
+  top: 1.5rem;
   width: 100%;
+  padding: 0 0.5rem;
+  list-style: none;
 }
 
 .nav ul li {
   width: 100%;
-  margin: 0.6rem 0;
+  margin: 0.3rem 0;
   position: relative;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .nav ul li .link {
   text-decoration: none;
-  color: white;
-  font-weight: 550;
-  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
   width: 100%;
-  font-size: 1.18rem;
-  padding: 0.8rem 0 0.8rem 1rem;
-  transition: 0.2s ease;
+  font-size: 1.1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .nav ul li .active {
-  background-color: #00b3ff5f;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .nav ul li .link:hover {
-  background-color: #00b3ff3c;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  transform: translateX(3px);
+}
+
+.icon {
+  margin-right: 0.8rem;
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+  opacity: 0.9;
 }
 
 .alert-indicator {
   position: absolute;
-  top: 0.8rem;
-  right: 1.1rem;
-  color: red;
+  top: 1rem;
+  right: 1rem;
+  color: #ff3e3e;
   font-size: 8px;
+  filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.3));
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* User profile styling */
+.user-profile {
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-profile:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0483b9, #05a0df);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  margin-right: 12px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-info {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.user-info h4 {
+  color: white;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 3px 0 0;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-menu-toggle {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+  opacity: 0.8;
+}
+
+.profile-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.25s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f7fa;
+}
+
+.dropdown-item i {
+  margin-right: 12px;
+  font-size: 15px;
+  width: 18px;
+  text-align: center;
+  color: #555;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 4px 0;
+}
+
+.dropdown-item.logout {
+  color: #e53935;
+}
+
+.dropdown-item.logout i {
+  color: #e53935;
 }
 
 .home-content {
@@ -92,18 +251,16 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f8f9fa;
 }
 
 .home-main {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
-.icon {
-  margin-right: 0.23rem;
-}
-
+/* Responsive adjustments */
 @media screen and (max-width: 1200px) {
   .home {
     flex-direction: column;
@@ -118,11 +275,23 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    min-width: unset;
   }
 
   .nav .nav-logo {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     width: auto;
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav .nav-logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav .nav-logo h2 {
+    font-size: 1.2rem;
   }
 
   .nav ul {
@@ -131,16 +300,27 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
+    padding: 0;
   }
 
   .nav ul li {
     width: auto;
-    margin: 0 0.5rem;
+    margin: 0 0.3rem;
   }
 
   .nav ul li .link {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .nav ul li .link:hover {
+    transform: translateY(-2px);
+    transform: translateX(0);
+  }
+
+  .icon {
+    margin-right: 0.4rem;
   }
 
   .home-content {
@@ -148,14 +328,29 @@
     height: calc(100vh - var(--nav-height));
   }
 
-  .logout-btn {
+  .user-profile {
     margin-top: 0;
     margin-left: auto;
+    background-color: transparent;
     padding: 0.5rem 1rem;
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .log-info {
-    position: static;
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    bottom: auto;
+    right: 0;
+    left: auto;
+    width: 220px;
+    border-radius: 0 0 10px 10px;
   }
 }
 
@@ -164,24 +359,53 @@
     flex-direction: column;
   }
 
+  .nav .nav-logo {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: flex-start;
+  }
+
   .nav ul {
     width: 100%;
     flex-wrap: wrap;
-    list-style: none;
-    margin-bottom: 1rem;
+    padding: 0.5rem;
+    margin: 0;
   }
 
   .nav ul li {
     flex: 1;
+    min-width: 80px;
+    margin: 0.3rem;
   }
 
   .nav ul li .link {
     text-align: center;
-    padding: 0.3rem;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .logout-btn {
+  .icon {
+    margin-right: 0;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+  }
+
+  .alert-indicator {
+    top: 0.3rem;
+    right: 0.3rem;
+  }
+
+  .user-profile {
     width: 100%;
-    margin-left: 0;
+    justify-content: center;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-dropdown {
+    width: 100%;
   }
 }
